@@ -1,0 +1,57 @@
+---
+// Intro page – the "book cover".
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Logo from '../components/Logo.astro';
+import Icon from '../components/Icon.astro';
+import { illustrations } from '../data/illustrations';
+import { getGroups } from '../lib/groups';
+
+const groups = await getGroups();
+---
+<BaseLayout title="Việt Sắc Ký" bare>
+  <section class="cover">
+    <Image src={illustrations.hero} alt="" class="cover__art" widths={[800, 1440, 2000]} sizes="100vw" loading="eager" fetchpriority="high" />
+    <div class="cover__glow" aria-hidden="true"></div>
+    <div class="cover__top container">
+      <Logo />
+    </div>
+    <div class="cover__center">
+      <p class="eyebrow cover__eyebrow">Cuốn sổ ghi chép hành trình qua {groups.length === 3 ? 'ba' : groups.length} vùng đất</p>
+      <h1 class="cover__title">Việt Sắc Ký</h1>
+      <p class="cover__slogan">Hành trình khám phá văn hóa các dân tộc Việt Nam</p>
+      <a class="btn btn-primary btn-lg cover__cta" href="/home">Bắt đầu hành trình <Icon name="arrow-right" /></a>
+      <p class="cover__meta">Khoảng 15 phút · {groups.length} chặng · {groups.length} con dấu</p>
+    </div>
+    <ol class="cover__route" aria-label="Các chặng của hành trình">
+      {groups.map((g) => (
+        <li><a href={`/ethnic/${g.id}`}><span class="cover__dot" aria-hidden="true"></span>{g.data.symbol} · {g.data.name}</a></li>
+      ))}
+    </ol>
+  </section>
+</BaseLayout>
+
+<style>
+  .cover { position: relative; min-height: 100vh; min-height: 100svh; overflow: hidden; display: flex; flex-direction: column; isolation: isolate; }
+  .cover__art { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 40% 100%; z-index: -2; animation: drift 24s ease-in-out infinite alternate; }
+  .cover__glow { position: absolute; left: 50%; top: 8%; width: min(1000px, 120vw); height: 560px; transform: translateX(-50%); border-radius: 50%; background: radial-gradient(closest-side, rgba(246, 240, 227, 0.92), rgba(246, 240, 227, 0.6) 55%, rgba(246, 240, 227, 0)); z-index: -1; }
+  .cover__top { padding-top: 28px; }
+  .cover__center { flex: 1; display: flex; flex-direction: column; align-items: center; text-align: center; padding: 72px 16px 140px; animation: rise 0.9s ease both; }
+  .cover__eyebrow { font-size: clamp(20px, 2.4vw, 28px); }
+  .cover__title { font-family: var(--font-serif); font-weight: 600; font-size: clamp(60px, 10vw, 120px); line-height: 1.05; color: var(--green-dark); margin-top: 6px; }
+  .cover__slogan { font-size: clamp(17px, 1.9vw, 22px); font-weight: 500; margin-top: 14px; }
+  .cover__cta { margin-top: 36px; }
+  .cover__meta { margin-top: 16px; font-size: 14px; font-weight: 500; color: var(--ink-soft); }
+  .cover__route { position: absolute; left: 0; right: 0; bottom: 40px; list-style: none; padding: 0 16px; display: flex; justify-content: center; flex-wrap: wrap; gap: 8px 0; }
+  .cover__route li { display: flex; align-items: center; }
+  .cover__route li + li::before { content: ''; width: 64px; border-top: 2px dashed rgba(246, 240, 227, 0.8); margin: 0 14px; }
+  .cover__route a { display: inline-flex; align-items: center; gap: 8px; color: var(--cream); font-weight: 600; font-size: 15px; text-decoration: none; text-shadow: 0 1px 6px rgba(0, 0, 0, 0.35); }
+  .cover__dot { width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--cream); }
+  @keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+  @keyframes drift { from { transform: scale(1.04) translateX(-1%); } to { transform: scale(1.04) translateX(1%); } }
+  @media (max-width: 600px) {
+    .cover__center { padding-top: 56px; }
+    .cover__route li + li::before { width: 20px; margin: 0 8px; }
+    .cover__route a { font-size: 13px; }
+  }
+</style>

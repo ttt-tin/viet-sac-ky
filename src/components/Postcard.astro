@@ -1,0 +1,30 @@
+---
+import { Image } from 'astro:assets';
+import Icon from './Icon.astro';
+import { getIllustration } from '../data/illustrations';
+import { getPhoto } from '../data/photos';
+import { groupUrl, type Group } from '../lib/groups';
+interface Props {
+  group: Group;
+  index: number;
+}
+const { group, index } = Astro.props;
+const { name, symbol, tagline, illustration, accent, heroPhoto } = group.data;
+const src = getPhoto(heroPhoto?.photo) ?? getIllustration(illustration);
+---
+<a class:list={['postcard card', `theme-${accent}`]} href={groupUrl(group.id)}>
+  {src && <Image src={src} alt={heroPhoto?.caption ?? ""} widths={[400, 800]} sizes="(max-width: 900px) 100vw, 384px" class="postcard__img" />}
+  <span class="postcard__num">Chặng {index + 1} · {symbol}</span>
+  <span class="postcard__name">{name}</span>
+  <span class="small">{tagline}</span>
+  <span class="postcard__go">Ghé thăm <Icon name="arrow-right" size={16} /></span>
+</a>
+
+<style>
+  .postcard { display: flex; flex-direction: column; gap: 8px; padding: 14px 14px 22px; text-decoration: none; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+  .postcard:hover { transform: translateY(-4px) rotate(-0.4deg); box-shadow: var(--shadow-photo); }
+  .postcard__img { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 6px; margin-bottom: 6px; }
+  .postcard__num { font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
+  .postcard__name { font-family: var(--font-serif); font-weight: 600; font-size: 26px; line-height: 1.2; }
+  .postcard__go { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; font-size: 15px; color: var(--green-dark); margin-top: 4px; }
+</style>

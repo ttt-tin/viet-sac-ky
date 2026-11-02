@@ -1,0 +1,25 @@
+---
+// A passport slot: shows an empty dashed circle until the visitor earns the
+// stamp for this ethnic group (state is filled in by scripts/passport.ts).
+import Stamp from './Stamp.astro';
+interface Props {
+  slug: string;
+  symbol: string;
+  name: string;
+  label?: string;
+  color?: string;
+  rotate?: number;
+  size?: number;
+}
+const { slug, symbol, name, label, color, rotate, size } = Astro.props;
+---
+<div class="stamp-slot" data-stamp-slot={slug}>
+  <Stamp name={symbol} sub={name} color={color} rotate={rotate} size={size} />
+  <div class="slot" style={size ? `--size:${size}px` : undefined}>{symbol}<br />{name}</div>
+  {label && <p class="stamp-slot__label">{label}</p>}
+</div>
+
+<style>
+  .stamp-slot { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+  .stamp-slot__label { font-size: 14px; font-weight: 600; color: var(--ink-soft); }
+</style>

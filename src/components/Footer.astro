@@ -1,0 +1,28 @@
+---
+import Logo from './Logo.astro';
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="container site-footer__inner">
+    <div>
+      <Logo dark />
+      <p>Hành trình khám phá văn hóa các dân tộc Việt Nam. Dự án học tập, mọi hình ảnh đều được ghi nguồn.</p>
+      <p class="small" style="color: var(--beige); opacity: 0.8">© {year} Nhóm Mèo Méo Meo · Việt Sắc Ký – Lưu giữ sắc màu, lan tỏa hồn Việt.</p>
+    </div>
+    <div class="site-footer__cols">
+      <div>
+        <strong>Hành trình</strong>
+        <a href="/home#map">Bản đồ</a>
+        <a href="/home#stages">Các dân tộc</a>
+        <a href="/home#passport">Sổ hành trình</a>
+      </div>
+      <div>
+        <strong>Dự án</strong>
+        <a href="/home#about">Về dự án</a>
+        <a href="/thank-you#project">Thông tin dự án</a>
+        <a href="/thank-you#team">Nhóm thực hiện</a>
+        <a href="/thank-you#sources">Nguồn tham khảo</a>
+      </div>
+    </div>
+  </div>
+</footer>

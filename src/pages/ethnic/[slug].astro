@@ -1,0 +1,196 @@
+---
+// One template for every ethnic-group room ("phòng trưng bày").
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Photo from '../../components/Photo.astro';
+import Block from '../../components/Block.astro';
+import Divider from '../../components/Divider.astro';
+import Quiz from '../../components/Quiz.astro';
+import ChatGuide from '../../components/ChatGuide.astro';
+import Icon from '../../components/Icon.astro';
+import { getGroups, groupUrl, type Group } from '../../lib/groups';
+import { paragraphs } from '../../lib/text';
+
+export async function getStaticPaths() {
+  const groups = await getGroups();
+  return groups.map((group, i) => ({
+    params: { slug: group.id },
+    props: { group, index: i, prev: groups[i - 1] ?? null, next: groups[i + 1] ?? null },
+  }));
+}
+
+interface Props {
+  group: Group;
+  index: number;
+  prev: Group | null;
+  next: Group | null;
+}
+const { group, index, prev, next } = Astro.props;
+const d = group.data;
+const sectionTitles = Object.fromEntries(d.sections.map((s) => [s.id, s.title]));
+---
+<BaseLayout title={d.name} description={`${d.name}: ${d.tagline}`} theme={d.accent} nav="groups">
+  <nav class="container crumb" aria-label="Vị trí">
+    <a href="/home#map">Bản đồ</a> <span aria-hidden="true">/</span> Chặng {index + 1} <span aria-hidden="true">/</span>
+    <strong aria-current="page">{d.name}</strong>
+  </nav>
+
+  <header class="container room-hero">
+    <div class="room-hero__wash" aria-hidden="true"></div>
+    <div class="room-hero__text">
+      <p class="tag">Chặng {index + 1} · {d.symbol}</p>
+      <h1 class="room-hero__name">{d.name}</h1>
+      {d.autonym && <p class="eyebrow">tự gọi là {d.autonym}</p>}
+      <div class="lead room-hero__intro" set:html={paragraphs(d.intro)} />
+      <div class="room-hero__actions">
+        <a class="btn btn-primary" href={`#${d.sections[0]?.id ?? 'quiz'}`}>Bắt đầu tham quan <Icon name="arrow-right" /></a>
+        <a class="btn btn-secondary" href="#quiz">Đến câu đố</a>
+      </div>
+    </div>
+    <div class="room-hero__photo">
+      <Photo
+        photo={d.heroPhoto?.photo}
+        illustration={d.illustration}
+        caption={d.heroPhoto?.caption ?? `Minh họa: ${d.name} – ${d.symbol}`}
+        credit={d.heroPhoto?.credit}
+        tilt={1.5}
+        eager
+        sizes="(max-width: 900px) 100vw, 600px"
+      />
+    </div>
+  </header>
+
+  <section class="container" aria-label="Thông tin nhanh">
+    <dl class="card facts">
+      {d.facts.map((f) => (
+        <div class="facts__item">
+          <dt class="small">{f.label}</dt>
+          <dd>{f.value}</dd>
+          {f.note && <dd class="small">{f.note}</dd>}
+        </div>
+      ))}
+    </dl>
+  </section>
+
+  <nav class="room-nav" aria-label="Các chuyên mục">
+    <div class="container room-nav__inner">
+      {d.sections.map((s, i) => <a href={`#${s.id}`} class="room-nav__chip">{String(i + 1).padStart(2, '0')} {s.short}</a>)}
+      <a href="#quiz" class="room-nav__chip room-nav__chip--quiz">Câu đố</a>
+    </div>
+  </nav>
+
+  {d.sections.map((s, i) => (
+    <>
+      {i > 0 && i % 3 === 0 && <Divider motif={d.accent} />}
+      <section class="container section" id={s.id} aria-labelledby={`${s.id}-title`}>
+        <div class="section__head">
+          <span class="section__num">{String(i + 1).padStart(2, '0')}</span>
+          <h2 class="h2" id={`${s.id}-title`}>{s.title}</h2>
+        </div>
+        <div class="section__body">
+          {s.blocks.map((b) => <Block block={b} />)}
+        </div>
+      </section>
+    </>
+  ))}
+
+  <Quiz slug={group.id} name={d.name} symbol={d.symbol} questions={d.quiz} next={next ? { href: groupUrl(next.id), label: next.data.name } : { href: '/thank-you', label: 'Trang cuối sổ' }} />
+
+  <nav class="container pager" aria-label="Chuyển chặng">
+    {prev ? (
+      <a class="pager__link" href={groupUrl(prev.id)}><span class="small"><Icon name="arrow-left" size={14} /> Chặng trước</span><span class={`h3 theme-${prev.data.accent}`}>{prev.data.name} · {prev.data.symbol}</span></a>
+    ) : <span />}
+    <a class="btn btn-secondary" href="/home#map">Về bản đồ</a>
+    {next ? (
+      <a class="pager__link pager__link--next" href={groupUrl(next.id)}><span class="small">Chặng tiếp theo <Icon name="arrow-right" size={14} /></span><span class={`h3 theme-${next.data.accent}`}>{next.data.name} · {next.data.symbol}</span></a>
+    ) : (
+      <a class="pager__link pager__link--next" href="/thank-you"><span class="small">Kết thúc <Icon name="arrow-right" size={14} /></span><span class="h3">Trang cuối sổ</span></a>
+    )}
+  </nav>
+
+  <section class="container sources" aria-labelledby="sources-title">
+    <h2 class="small sources__title" id="sources-title">Nguồn của trang này</h2>
+    <ul>
+      {d.sources.map((s) => (
+        <li>{s.url ? <a href={s.url} target="_blank" rel="noopener noreferrer">{s.title}</a> : s.title}</li>
+      ))}
+    </ul>
+  </section>
+
+  <ChatGuide slot="after" slug={group.id} name={d.name} greeting={d.chat.greeting} suggestions={d.chat.suggestions} sections={sectionTitles} />
+</BaseLayout>
+
+<style>
+  .crumb { padding-top: 20px; font-size: 14px; color: var(--ink-soft); font-weight: 500; }
+  .crumb a { text-decoration: none; }
+  .crumb a:hover { text-decoration: underline; }
+  .crumb strong { color: var(--ink); }
+  .room-hero { position: relative; display: grid; grid-template-columns: minmax(0, 560px) minmax(0, 1fr); gap: 64px; align-items: center; padding-block: 40px 80px; isolation: isolate; }
+  .room-hero__wash { position: absolute; left: -80px; top: -40px; width: 820px; max-width: 100%; height: 520px; background: radial-gradient(closest-side, var(--accent), transparent); opacity: 0.12; z-index: -1; pointer-events: none; }
+  .room-hero__name { font-family: var(--font-serif); font-weight: 600; font-size: clamp(64px, 9vw, 104px); line-height: 1; color: var(--accent); margin-top: 18px; }
+  .room-hero .eyebrow { margin-top: 10px; }
+  .room-hero__intro { margin-top: 22px; }
+  .room-hero__actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 30px; }
+  .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); border-radius: 14px; overflow: hidden; }
+  .facts__item { padding: 18px 22px; border-right: 1px solid var(--line); }
+  .facts__item:last-child { border-right: none; }
+  .facts__item dd { margin: 2px 0 0; font-family: var(--font-serif); font-weight: 600; font-size: 20px; line-height: 1.3; }
+  .facts__item dd.small { font-family: var(--font-sans); font-weight: 400; font-size: 13px; }
+  .room-nav { position: sticky; top: var(--header-h); z-index: 30; margin-top: 40px; background: var(--cream); border-block: 1px solid var(--line); }
+  .room-nav__inner { display: flex; gap: 10px; padding-block: 12px; overflow-x: auto; scrollbar-width: none; }
+  .room-nav__chip { flex-shrink: 0; display: inline-flex; align-items: center; min-height: 36px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); font-size: 14px; font-weight: 500; color: var(--ink-soft); text-decoration: none; }
+  .room-nav__chip:hover, .room-nav__chip.is-active { background: var(--accent); border-color: var(--accent); color: #fff7ee; }
+  .room-nav__chip--quiz { border-style: dashed; }
+  .section__body { display: grid; gap: 28px; }
+  .pager { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 16px; margin-top: 64px; padding-block: 28px; border-top: 1px solid var(--line); }
+  .pager__link { display: flex; flex-direction: column; gap: 4px; text-decoration: none; }
+  .pager__link .small { display: inline-flex; align-items: center; gap: 6px; }
+  .pager__link .h3 { color: var(--accent); }
+  .pager__link--next { align-items: flex-end; text-align: right; }
+  .sources { padding-top: 8px; }
+  .sources__title { font-weight: 600; color: var(--ink); }
+  .sources ul { padding-left: 18px; font-size: 13px; color: var(--ink-soft); line-height: 1.8; }
+  @media (max-width: 900px) {
+    .room-hero { grid-template-columns: 1fr; gap: 32px; padding-block: 24px 48px; }
+    .room-hero__photo { order: -1; }
+    .facts__item { border-right: none; border-bottom: 1px solid var(--line); }
+    .pager { grid-template-columns: 1fr 1fr; }
+    .pager > .btn { grid-column: 1 / -1; order: 3; }
+  }
+</style>
+
+<script>
+  // Highlight the chip of the section currently on screen.
+  // Note: never call chip.scrollIntoView() here. The chip lives in a sticky bar, and
+  // scrollIntoView() also scrolls the page, which made the page jump between sections.
+  // Only the chip bar itself is scrolled horizontally.
+  const bar = document.querySelector<HTMLElement>('.room-nav__inner');
+  const chips = new Map<string, HTMLElement>();
+  document.querySelectorAll<HTMLAnchorElement>('.room-nav__chip').forEach((a) => chips.set(a.hash.slice(1), a));
+  let active: HTMLElement | undefined;
+
+  function revealChip(chip: HTMLElement) {
+    if (!bar) return;
+    const left = chip.offsetLeft - bar.offsetLeft;
+    const right = left + chip.offsetWidth;
+    if (left < bar.scrollLeft || right > bar.scrollLeft + bar.clientWidth) {
+      bar.scrollTo({ left: left - 16, behavior: 'smooth' });
+    }
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      const hit = entries.find((e) => e.isIntersecting);
+      const chip = hit && chips.get(hit.target.id);
+      if (!chip || chip === active) return;
+      active?.classList.remove('is-active');
+      chip.classList.add('is-active');
+      active = chip;
+      requestAnimationFrame(() => revealChip(chip));
+    },
+    { rootMargin: '-45% 0px -50% 0px' },
+  );
+  chips.forEach((_, id) => {
+    const target = document.getElementById(id);
+    if (target) observer.observe(target);
+  });
+</script>

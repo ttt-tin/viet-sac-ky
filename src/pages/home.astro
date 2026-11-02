@@ -1,0 +1,155 @@
+---
+// Home – project introduction, illustrated map, postcards and passport.
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import VietnamMap from '../components/VietnamMap.astro';
+import Postcard from '../components/Postcard.astro';
+import StampSlot from '../components/StampSlot.astro';
+import Icon from '../components/Icon.astro';
+import { getGroups, groupUrl } from '../lib/groups';
+import { getIllustration } from '../data/illustrations';
+import { getPhoto } from '../data/photos';
+
+const groups = await getGroups();
+const first = groups[0];
+const count = groups.length === 3 ? 'ba' : String(groups.length);
+---
+<BaseLayout title="Trang chủ" nav="map">
+  <section class="about container" id="about">
+    <div class="about__text">
+      <p class="eyebrow">Về dự án</p>
+      <h1 class="h1">Một bảo tàng nhỏ, {count} vùng đất lớn</h1>
+      <p class="lead">
+        Việt Sắc Ký đưa bạn đi từ những bản làng trong mây ở Tây Bắc, qua ngọn lửa thiêng bên sông Lô, đến buôn làng đất đỏ
+        Tây Nguyên. Mỗi chặng là một phòng trưng bày nhỏ về nhà ở, trang phục, lễ hội, âm nhạc và ẩm thực.
+      </p>
+      <p>Hãy đi chậm, đọc kỹ và nhận đủ {count} con dấu vào sổ hành trình của bạn.</p>
+    </div>
+    <ol class="steps">
+      <li class="card step"><span class="step__n">1</span><div><p class="step__t">Chọn một vùng đất</p><p class="small">Bấm vào một điểm trên bản đồ hoặc một tấm bưu thiếp bên dưới.</p></div></li>
+      <li class="card step"><span class="step__n">2</span><div><p class="step__t">Khám phá phòng trưng bày</p><p class="small">Chín chuyên mục, từ nguồn gốc, nhà ở đến di sản hôm nay. Có người dẫn đường AI để hỏi thêm.</p></div></li>
+      <li class="card step"><span class="step__n">3</span><div><p class="step__t">Nhận con dấu</p><p class="small">Trả lời câu đố cuối phòng để đóng dấu vào sổ hành trình.</p></div></li>
+    </ol>
+  </section>
+
+  <section class="band" id="map" aria-labelledby="map-title">
+    <div class="container mapband">
+      <div class="mapframe card">
+        <p class="caption">Rê chuột hoặc chạm vào một điểm để ghé thăm</p>
+        <VietnamMap groups={groups} selected={first?.id} />
+      </div>
+      <div class="mapside">
+        <p class="eyebrow">Tấm bản đồ</p>
+        <h2 class="h2" id="map-title">{groups.length} chặng, từ Bắc vào Nam</h2>
+        <ul class="legend">
+          {groups.map((g) => <li class={`theme-${g.data.accent}`}><span class="legend__dot"></span>{g.data.name}</li>)}
+        </ul>
+        {groups.map((g, i) => {
+          const src = getPhoto(g.data.heroPhoto?.photo) ?? getIllustration(g.data.illustration);
+          const pop = g.data.facts[0];
+          const lang = g.data.facts.find((f) => f.label === 'Ngữ hệ');
+          const place = g.data.facts.find((f) => f.label === 'Địa bàn chính');
+          return (
+            <article class:list={['card mapcard', `theme-${g.data.accent}`]} data-map-card={g.id} hidden={i !== 0}>
+              {src && (
+                <figure class="photo" style="--tilt:-1.2deg">
+                  <Image src={src} alt={g.data.heroPhoto?.caption ?? `Minh họa về người ${g.data.name}`} widths={[400, 800]} sizes="(max-width: 900px) 100vw, 520px" />
+                  {g.data.heroPhoto && <figcaption class="caption">Ảnh: {g.data.heroPhoto.credit}</figcaption>}
+                </figure>
+              )}
+              <p class="tag tag-soft">Chặng {i + 1} · {g.data.symbol}</p>
+              <h3 class="h3 mapcard__name">{g.data.name}</h3>
+              <p>{g.data.tagline}</p>
+              <dl class="mapcard__facts">
+                {[pop, place, lang].filter(Boolean).map((f) => (
+                  <div><dt class="small">{f!.label}</dt><dd>{f!.value}</dd></div>
+                ))}
+              </dl>
+              <a class="btn btn-primary" href={groupUrl(g.id)}>Ghé thăm {g.data.name} <Icon name="arrow-right" /></a>
+            </article>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <section class="container stages" id="stages" aria-labelledby="stages-title">
+    <p class="eyebrow">{groups.length === 3 ? 'Ba' : groups.length} tấm bưu thiếp</p>
+    <h2 class="h2" id="stages-title">Chọn chặng để bắt đầu</h2>
+    <div class="stages__row">
+      {groups.map((g, i) => <Postcard group={g} index={i} />)}
+    </div>
+  </section>
+
+  <section class="container" id="passport" aria-labelledby="passport-title">
+    <div class="card passport">
+      <div class="passport__info">
+        <p class="eyebrow">Sổ hành trình của bạn</p>
+        <h2 class="h3 passport__count" id="passport-title"><span data-passport-count>0</span> trên {groups.length} con dấu</h2>
+        <div class="bar"><span data-passport-progress></span></div>
+        <p class="small" data-passport-incomplete>Đủ {count} con dấu để mở Trang cuối sổ. Con dấu được lưu ngay trên trình duyệt của bạn.</p>
+        <p data-passport-complete hidden>
+          <a class="btn btn-primary" href="/thank-you">Mở Trang cuối sổ <Icon name="arrow-right" /></a>
+        </p>
+      </div>
+      <div class="passport__slots">
+        {groups.map((g, i) => (
+          <StampSlot slug={g.id} symbol={g.data.symbol} name={g.data.name} label={`Chặng ${i + 1}`} color={`var(--${g.data.accent})`} rotate={-10 + i * 8} />
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  // Hovering or focusing a map marker shows the matching card beside the map.
+  const cards = document.querySelectorAll<HTMLElement>('[data-map-card]');
+  const markers = document.querySelectorAll<SVGElement>('[data-map-marker]');
+  function select(id: string) {
+    cards.forEach((c) => (c.hidden = c.dataset.mapCard !== id));
+    markers.forEach((m) => m.classList.toggle('is-selected', m.dataset.mapMarker === id));
+  }
+  markers.forEach((m) => {
+    const id = m.dataset.mapMarker ?? '';
+    m.addEventListener('mouseenter', () => select(id));
+    m.addEventListener('focus', () => select(id));
+  });
+</script>
+
+<style>
+  .about { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 80px; padding-block: 88px; }
+  .about__text .h1 { margin: 10px 0 22px; }
+  .about__text p + p { margin-top: 14px; }
+  .steps { list-style: none; padding: 0; display: grid; gap: 16px; align-content: start; }
+  .step { display: flex; gap: 20px; padding: 22px 24px; }
+  .step__n { font-family: var(--font-serif); font-weight: 700; font-size: 34px; line-height: 1; color: var(--brown); width: 28px; }
+  .step__t { font-weight: 600; font-size: 18px; margin-bottom: 4px; }
+  .mapband { display: grid; grid-template-columns: minmax(0, 600px) minmax(0, 1fr); gap: 72px; padding-block: 80px; align-items: start; }
+  .mapframe { padding: 20px; background: #f8f2e6; border-radius: 16px; }
+  .legend { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 22px; margin: 18px 0 26px; font-size: 14px; font-weight: 500; color: var(--ink-soft); }
+  .legend li { display: inline-flex; align-items: center; gap: 8px; }
+  .legend__dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
+  .mapcard { padding: 28px; display: flex; flex-direction: column; gap: 14px; align-items: flex-start; }
+  .mapcard[hidden] { display: none; }
+  .mapcard .photo { width: 100%; margin-bottom: 8px; }
+  .mapcard__name { font-size: 30px; }
+  .mapcard__facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); width: 100%; border-block: 1px solid var(--line); padding-block: 12px; gap: 12px; }
+  .mapcard__facts dd { margin: 0; font-family: var(--font-serif); font-weight: 600; font-size: 18px; line-height: 1.3; }
+  .stages { padding-top: 88px; }
+  .stages__row { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; margin-top: 36px; }
+  #passport { padding-top: 56px; }
+  .passport { display: grid; grid-template-columns: 360px 1fr; gap: 56px; padding: 40px 48px; align-items: center; border-radius: 16px; }
+  .passport__count { font-size: 30px; margin-top: 4px; }
+  .bar { height: 8px; border-radius: 99px; background: var(--beige); margin: 16px 0 14px; overflow: hidden; }
+  .bar span { display: block; height: 100%; width: 0; border-radius: 99px; background: var(--stamp); transition: width 0.4s ease; }
+  .passport__slots { display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; }
+  @media (max-width: 900px) {
+    .about, .mapband, .passport { grid-template-columns: 1fr; gap: 32px; }
+    .about { padding-block: 56px; }
+    .mapband { padding-block: 56px; }
+    .passport { padding: 24px 20px; }
+    .passport__slots { gap: 16px; }
+    .passport__slots :global(.stamp), .passport__slots :global(.slot) { --size: 88px; }
+    .mapcard__facts { grid-template-columns: 1fr 1fr; }
+  }
+</style>

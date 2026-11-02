@@ -1,0 +1,23 @@
+{
+  "name": "viet-sac-ky",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Việt Sắc Ký – an online journey through the cultures of the Hà Nhì, Pà Thẻn and Ê Đê peoples.",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "engines": {
+    "node": ">=18.20.8"
+  },
+  "dependencies": {
+    "@astrojs/vercel": "^8.2.0",
+    "@fontsource/be-vietnam-pro": "^5.2.0",
+    "@fontsource/lora": "^5.2.0",
+    "@fontsource/patrick-hand": "^5.2.0",
+    "astro": "^5.13.0"
+  }
+}

@@ -1,0 +1,98 @@
+---
+// Floating AI guide for one ethnic-group room. Talks to /api/chat.
+import Icon from './Icon.astro';
+interface Props {
+  slug: string;
+  name: string;
+  greeting: string;
+  suggestions: string[];
+  sections: Record<string, string>;
+}
+const { slug, name, greeting, suggestions, sections } = Astro.props;
+const panelId = `chat-panel-${slug}`;
+---
+<div class="chat" data-chat data-group={slug} data-sections={JSON.stringify(sections)}>
+  <button class="chat-fab" type="button" data-chat-open aria-expanded="false" aria-controls={panelId}>
+    <Icon name="chat" size={22} />
+    <span>Hỏi người dẫn đường</span>
+  </button>
+
+  <section class="chat-panel" id={panelId} data-chat-panel hidden role="dialog" aria-labelledby={`${panelId}-title`}>
+    <header class="chat-panel__head">
+      <div>
+        <p class="eyebrow">Người dẫn đường</p>
+        <h2 class="chat-panel__title" id={`${panelId}-title`}>Phòng {name}</h2>
+      </div>
+      <button class="chat-panel__close" type="button" data-chat-close aria-label="Đóng khung trò chuyện">
+        <Icon name="close" size={22} />
+      </button>
+    </header>
+
+    <ol class="chat-log" data-chat-log aria-live="polite">
+      <li class="msg msg--bot"><p class="msg__text">{greeting}</p></li>
+    </ol>
+
+    {suggestions.length > 0 && (
+      <div class="chat-suggest" data-chat-suggest>
+        {suggestions.map((s) => <button type="button" class="chat-chip" data-suggest>{s}</button>)}
+      </div>
+    )}
+
+    <form class="chat-form" data-chat-form>
+      <label class="sr-only" for={`${panelId}-input`}>Câu hỏi của bạn</label>
+      <textarea id={`${panelId}-input`} rows="1" maxlength="500" placeholder={`Hỏi về văn hóa ${name}…`} required></textarea>
+      <button type="submit" aria-label="Gửi câu hỏi"><Icon name="send" size={20} /></button>
+    </form>
+    <p class="chat-note">Trợ lý AI trả lời dựa trên tư liệu của nhóm và có thể sai. Hãy đối chiếu với nguồn ở cuối trang.</p>
+  </section>
+</div>
+
+<script>
+  import { initChat } from '../scripts/chat';
+  document.querySelectorAll<HTMLElement>('[data-chat]').forEach(initChat);
+</script>
+
+<style>
+  .chat-fab {
+    position: fixed; right: 24px; bottom: 24px; z-index: 50;
+    display: inline-flex; align-items: center; gap: 10px; min-height: 56px; padding: 0 22px;
+    border: none; border-radius: 999px; background: var(--accent); color: #fff7ee;
+    font-weight: 600; font-size: 15px; cursor: pointer; box-shadow: 0 8px 24px rgba(46, 42, 36, 0.25);
+  }
+  .chat.is-open .chat-fab { display: none; }
+  .chat-panel {
+    position: fixed; right: 24px; bottom: 24px; z-index: 60; width: 400px; height: min(640px, calc(100vh - 48px));
+    display: flex; flex-direction: column; background: var(--card); border: 1px solid var(--line);
+    border-radius: 16px; box-shadow: 0 16px 48px rgba(46, 42, 36, 0.28); overflow: hidden;
+  }
+  .chat-panel[hidden] { display: none; }
+  .chat-panel__head { display: flex; justify-content: space-between; align-items: flex-start; padding: 16px 18px; background: var(--accent); color: #fff7ee; }
+  .chat-panel__head .eyebrow { color: rgba(255, 247, 238, 0.85); font-size: 18px; }
+  .chat-panel__title { font-family: var(--font-serif); font-weight: 600; font-size: 22px; }
+  .chat-panel__close { background: transparent; border: none; color: inherit; width: 40px; height: 40px; display: grid; place-items: center; border-radius: 8px; cursor: pointer; }
+  .chat-log { list-style: none; padding: 16px; margin: 0; flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
+  .chat-log :global(.msg) { max-width: 88%; padding: 12px 14px; border-radius: 14px; font-size: 15px; line-height: 1.55; }
+  .chat-log :global(.msg__text) { white-space: pre-wrap; }
+  .chat-log :global(.msg--bot) { align-self: flex-start; background: var(--beige); border-bottom-left-radius: 4px; }
+  .chat-log :global(.msg--user) { align-self: flex-end; background: var(--green); color: var(--cream); border-bottom-right-radius: 4px; }
+  .chat-log :global(.msg--error) { background: #f4dcd6; color: #7a2418; }
+  .chat-log :global(.is-typing .msg__text::after) { content: '…'; animation: blink 1s infinite; }
+  .chat-log :global(.msg__sources) { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .chat-log :global(.msg__source) { font-size: 13px; font-weight: 600; color: var(--accent); background: var(--card); border: 1px solid var(--line); border-radius: 999px; padding: 4px 10px; text-decoration: none; }
+  .chat-suggest { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 16px 12px; }
+  .chat-suggest[hidden] { display: none; }
+  .chat-chip { border: 1px solid var(--line); background: var(--cream); border-radius: 999px; padding: 6px 12px; font-size: 13px; text-align: left; cursor: pointer; }
+  .chat-chip:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
+  .chat-form { display: flex; gap: 8px; padding: 12px 16px; border-top: 1px solid var(--line); }
+  .chat-form textarea { flex: 1; resize: none; border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; background: #fffdf8; font-size: 15px; max-height: 120px; }
+  .chat-form button { width: 46px; border: none; border-radius: 10px; background: var(--accent); color: #fff7ee; display: grid; place-items: center; cursor: pointer; }
+  .chat-form button:disabled { opacity: 0.5; cursor: wait; }
+  .chat-note { font-size: 12px; color: var(--ink-soft); padding: 0 16px 12px; }
+  @keyframes blink { 50% { opacity: 0.2; } }
+  @media (max-width: 600px) {
+    .chat-fab { right: 16px; bottom: 16px; }
+    .chat-fab span { display: none; }
+    .chat-fab { width: 56px; padding: 0; justify-content: center; }
+    .chat-panel { inset: 0; width: auto; height: auto; border-radius: 0; border: none; }
+  }
+</style>

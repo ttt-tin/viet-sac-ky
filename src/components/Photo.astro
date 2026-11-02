@@ -1,0 +1,48 @@
+---
+// A "taped into the notebook" photo frame. Uses a documentary photo when
+// `photo` is given, otherwise a placeholder illustration, otherwise a clearly
+// labelled empty box so missing pictures are easy to spot.
+import { Image } from 'astro:assets';
+import { getIllustration } from '../data/illustrations';
+import { getPhoto } from '../data/photos';
+interface Props {
+  photo?: string;
+  illustration?: string;
+  caption: string;
+  credit?: string;
+  tilt?: number;
+  eager?: boolean;
+  sizes?: string;
+  /** Keep the photo's own proportions instead of cropping to 3:2. */
+  natural?: boolean;
+}
+const {
+  photo,
+  illustration,
+  caption,
+  credit,
+  tilt = -1.5,
+  eager = false,
+  sizes = '(max-width: 900px) 100vw, 600px',
+  natural = false,
+} = Astro.props;
+const src = getPhoto(photo) ?? getIllustration(illustration);
+---
+<figure class:list={['photo', { 'photo--placeholder': !src, 'photo--natural': natural }]} style={`--tilt:${tilt}deg`}>
+  {src ? (
+    <Image src={src} alt={caption} widths={[400, 800, 1200]} sizes={sizes} loading={eager ? 'eager' : 'lazy'} />
+  ) : (
+    <div class="placeholder-box"><span class="caption">{caption}</span></div>
+  )}
+  {(src || credit) && (
+    <figcaption class="caption">
+      {src && caption}
+      {credit && <span class="photo__credit"> · Ảnh: {credit}</span>}
+    </figcaption>
+  )}
+</figure>
+
+<style>
+  .photo__credit { font-family: var(--font-sans); font-size: 12px; }
+  .photo--natural img { aspect-ratio: auto; }
+</style>

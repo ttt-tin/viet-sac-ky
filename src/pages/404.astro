@@ -1,0 +1,16 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/Icon.astro';
+---
+<BaseLayout title="Lạc đường">
+  <section class="container lost">
+    <p class="eyebrow">Trang 404</p>
+    <h1 class="h1">Lạc đường giữa núi rừng…</h1>
+    <p class="lead">Trang bạn tìm không có trong cuốn sổ này. Hãy quay về tấm bản đồ để tiếp tục hành trình nhé.</p>
+    <a class="btn btn-primary" href="/home#map">Về bản đồ <Icon name="arrow-right" /></a>
+  </section>
+</BaseLayout>
+
+<style>
+  .lost { min-height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: 18px; padding-block: 96px; max-width: 720px; }
+</style>

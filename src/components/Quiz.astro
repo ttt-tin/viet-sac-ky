@@ -1,0 +1,55 @@
+---
+import StampSlot from './StampSlot.astro';
+interface Props {
+  slug: string;
+  name: string;
+  symbol: string;
+  questions: { question: string; options: string[]; answer: number }[];
+  next?: { href: string; label: string };
+}
+const { slug, name, symbol, questions, next } = Astro.props;
+// Safe to embed inside <script type="application/json">.
+const json = JSON.stringify(questions).replace(/</g, '\\u003c');
+---
+<section class="quiz container" id="quiz" data-quiz data-slug={slug} data-symbol={symbol} data-next-href={next?.href} data-next-label={next?.label} aria-labelledby={`quiz-title-${slug}`}>
+  <script type="application/json" data-quiz-data set:html={json}></script>
+  <div class="quiz__intro">
+    <p class="eyebrow">Câu đố cuối phòng</p>
+    <h2 class="h3 quiz__title" id={`quiz-title-${slug}`}>Trả lời đúng cả {questions.length} câu để nhận dấu {symbol}</h2>
+    <StampSlot slug={slug} symbol={symbol} name={name} color="var(--beige)" />
+  </div>
+  <div class="quiz__body" data-quiz-body>
+    <noscript><p>Hãy bật JavaScript để chơi câu đố và nhận con dấu.</p></noscript>
+  </div>
+</section>
+
+<script>
+  import { initQuiz } from '../scripts/quiz';
+  document.querySelectorAll<HTMLElement>('[data-quiz]').forEach(initQuiz);
+</script>
+
+<style>
+  .quiz { margin-top: 96px; background: var(--green-dark); color: var(--cream); border-radius: 18px; padding: 40px 48px; display: grid; grid-template-columns: 300px 1fr; gap: 56px; }
+  .quiz .eyebrow { color: var(--beige); }
+  .quiz__title { color: var(--cream); font-size: 28px; margin: 8px 0 28px; }
+  .quiz :global(.slot) { border-color: rgba(246, 240, 227, 0.4); color: rgba(246, 240, 227, 0.7); }
+  .quiz__body { display: flex; flex-direction: column; gap: 12px; min-height: 320px; }
+  .quiz :global(.quiz__progress) { display: flex; gap: 16px; flex-wrap: wrap; font-size: 14px; color: var(--beige); }
+  .quiz :global(.quiz__note) { font-family: var(--font-hand); font-size: 17px; }
+  .quiz :global(.quiz__question) { font-size: 20px; font-weight: 600; line-height: 1.5; margin-bottom: 4px; }
+  .quiz :global(.quiz__options) { display: grid; gap: 10px; }
+  .quiz :global(.quiz__option) { display: flex; align-items: center; gap: 14px; min-height: 56px; padding: 8px 20px; text-align: left; border-radius: 10px; border: 1px solid rgba(246, 240, 227, 0.35); background: transparent; color: var(--cream); font-size: 16px; font-weight: 500; cursor: pointer; }
+  .quiz :global(.quiz__option:hover:not(:disabled)) { background: rgba(246, 240, 227, 0.08); }
+  .quiz :global(.quiz__option:disabled) { cursor: default; }
+  .quiz :global(.quiz__letter) { width: 28px; height: 28px; flex-shrink: 0; border-radius: 50%; border: 1.5px solid rgba(246, 240, 227, 0.6); display: grid; place-items: center; font-size: 13px; font-weight: 600; }
+  .quiz :global(.quiz__option.is-correct) { background: var(--cream); color: var(--green-dark); font-weight: 700; }
+  .quiz :global(.quiz__option.is-correct .quiz__letter) { border-color: var(--green); }
+  .quiz :global(.quiz__option.is-wrong) { opacity: 0.5; text-decoration: line-through; }
+  .quiz :global(.quiz__feedback) { min-height: 1.6em; font-weight: 600; }
+  .quiz :global(.btn-quiz) { background: var(--cream); color: var(--green-dark); align-self: flex-start; }
+  .quiz :global(.btn-quiz-outline) { background: transparent; color: var(--cream); border-color: rgba(246, 240, 227, 0.6); }
+  .quiz :global(.quiz__actions) { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px; }
+  @media (max-width: 900px) {
+    .quiz { grid-template-columns: 1fr; gap: 24px; padding: 28px 20px; border-radius: 14px; width: calc(100% - 2 * var(--gutter)); }
+  }
+</style>

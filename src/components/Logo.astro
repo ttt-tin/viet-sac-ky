@@ -1,0 +1,11 @@
+---
+interface Props {
+  dark?: boolean;
+  href?: string;
+}
+const { dark = false, href = '/home' } = Astro.props;
+---
+<a class:list={['logo', { 'logo--dark': dark }]} href={href} aria-label="Việt Sắc Ký – về trang chủ">
+  <span class="logo__mark" aria-hidden="true">VSK</span>
+  <span class="logo__text">Việt Sắc Ký</span>
+</a>

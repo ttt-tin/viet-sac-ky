@@ -1,0 +1,271 @@
+name: Hà Nhì
+order: 1
+symbol: Mây
+accent: ha-nhi
+illustration: ha-nhi
+heroPhoto:
+  photo: ha-nhi/01
+  caption: Thiếu nữ Hà Nhì Hoa trong trang phục truyền thống
+  credit: Báo Sức khỏe & Đời sống
+tagline: Bản làng nhà trình tường giữa mây trời Y Tý.
+intro: >-
+  Ở độ cao 1.000–2.000 m nơi biên giới Tây Bắc, người Hà Nhì dựng nhà trình tường bằng đất,
+  khai khẩn ruộng bậc thang và giữ tục nối tên cha qua nhiều đời.
+map:
+  lon: 103.62
+  lat: 22.62
+  label: left
+facts:
+  - label: Dân số (2019)
+    value: khoảng 25.500 người
+  - label: Ngữ hệ
+    value: Tạng – Miến
+  - label: Địa bàn chính
+    value: Lào Cai, Lai Châu, Điện Biên
+  - label: Độ cao cư trú
+    value: 1.000–2.000 m
+  - label: Lễ hội tiêu biểu
+    value: Tết Khô Già Già
+sections:
+  - id: origins
+    title: Nguồn gốc & ngôn ngữ
+    short: Nguồn gốc
+    blocks:
+      - type: text
+        body: |-
+          Hà Nhì là một trong 54 dân tộc của Việt Nam, với khoảng 25.500 người theo Tổng điều tra dân số năm 2019. Tiếng Hà Nhì thuộc nhóm ngôn ngữ **Tạng – Miến**; chữ viết hiện đại của người Hà Nhì mới được xây dựng trong thời gian gần đây.
+
+          Người Hà Nhì không chỉ sống ở Việt Nam mà còn ở Trung Quốc (đông nhất, gọi là dân tộc Hani, ở tỉnh Vân Nam), Lào và Myanmar. Người Hà Nhì ở Việt Nam là những nhóm di cư từ vùng biên giới phía Bắc xuống cách đây vài trăm năm.
+      - type: phrases
+        title: Vài câu giao tiếp bằng tiếng Hà Nhì
+        items:
+          - local: A di
+            vi: Xin chào
+          - local: Ma la ni
+            vi: Cảm ơn
+          - local: Bu bu
+            vi: Xin lỗi
+          - local: A ni
+            vi: Vâng
+          - local: A ja
+            vi: Có
+          - local: Khô
+            vi: Không
+  - id: land
+    title: Vùng đất & cảnh quan
+    short: Vùng đất
+    blocks:
+      - type: text
+        body: |-
+          Người Hà Nhì sống tập trung ở vùng núi cao biên giới phía Tây Bắc, chủ yếu ở ba tỉnh **Lào Cai** (vùng Bát Xát, nổi tiếng nhất là Y Tý), **Lai Châu** (vùng Mường Tè, Nậm Nhùn) và **Điện Biên** (vùng Mường Nhé, Nậm Pồ). Bản làng thường nằm ở độ cao khoảng 1.000–2.000 m, gần đường biên giới.
+
+          Đây là vùng núi cao hiểm trở, dốc đứng, nhiều suối sâu và rừng nguyên sinh. Khí hậu lạnh quanh năm; mùa đông có sương mù dày, có khi có băng giá. Y Tý thường được gọi là nơi "săn mây" nổi tiếng. Người Hà Nhì khai khẩn ruộng bậc thang trên sườn núi, trồng lúa nước, lúa nương, ngô và nuôi gia súc.
+      - type: gallery
+        items:
+          - photo: ha-nhi/03
+            caption: "Bản làng người Hà Nhì ở Y Tý"
+            credit: "Miền Núi Tây Bắc"
+          - photo: ha-nhi/04
+            caption: "Ruộng bậc thang của người Hà Nhì"
+            credit: "Báo Lao Động"
+      - type: compare
+        title: Hai nhóm địa phương
+        items:
+          - title: Hà Nhì Hoa
+            points:
+              - Gồm hai nhóm nhỏ là Cồ Chồ (sống ở vùng thấp) và La Mí, còn gọi là Lê Mí (sống ở vùng cao, thượng nguồn).
+              - Cư trú chủ yếu tại Lào Cai (nổi bật là vùng Y Tý) và vùng Sìn Hồ, Phong Thổ của Lai Châu.
+          - title: Hà Nhì Đen
+            points:
+              - Nhóm phổ biến hơn.
+              - Cư trú tập trung tại Điện Biên (như Sín Thầu) và Lai Châu (như Ka Lăng).
+      - type: did
+        body: Hai nhóm có khác biệt nhỏ về tiếng nói, cách ăn mặc và tập quán nhưng cùng chung gốc văn hóa. Tên gọi các nhóm có thể được ghi khác nhau tùy tài liệu.
+  - id: house
+    title: Nhà ở
+    short: Nhà ở
+    blocks:
+      - type: text
+        body: |-
+          Nhà trình tường là di sản kiến trúc đặc sắc bậc nhất của người Hà Nhì. Tường nhà được nhào nặn và nện bằng đất mịn tự nhiên, kết hợp với bộ khung vì kèo chắc chắn và mái lợp dốc. Nhìn từ xa, những ngôi nhà tựa lưng vào núi, hướng cửa ra thung lũng, mọc nối tiếp nhau như những cây nấm khổng lồ.
+      - type: gallery
+        items:
+          - photo: ha-nhi/05
+            caption: "Nhà trình tường của người Hà Nhì"
+            credit: "Vietmountain Travel"
+          - photo: ha-nhi/06
+            caption: "Nhà trình tường tường đất, mái cỏ"
+            credit: "Ashui.com"
+          - photo: ha-nhi/09
+            caption: "Một ngôi nhà trình tường"
+            credit: "Báo Vĩnh Long"
+      - type: cards
+        columns: 3
+        items:
+          - name: Tường đất dày 30–40 cm
+            body: Giữ ấm hiệu quả trong mùa đông lạnh giá và luôn mát vào mùa hè vùng cao.
+          - name: Ba gian, hiên rộng
+            body: Mặt bằng vuông hoặc chữ nhật, hiên rộng che gió rét, kín đáo và có rất ít cửa sổ.
+          - name: Bếp lửa ở trung tâm
+            body: Nơi giữ hơi ấm tình thân và ngọn lửa văn hóa của gia đình.
+      - type: did
+        body: Trong bếp luôn có "hòn đá thần" Phu Chu Ma được chôn sâu cạnh nơi nấu nướng, mang ý nghĩa làm chủ đất và giữ bình an cho gia đình.
+      - type: gallery
+        title: Bên trong nhà trình tường
+        items:
+          - photo: ha-nhi/07
+            caption: "Không gian sinh hoạt trong nhà"
+            credit: "Ashui.com"
+          - photo: ha-nhi/08
+            caption: "Khu bếp của ngôi nhà"
+            credit: "Ashui.com"
+  - id: costume
+    title: Trang phục & thổ cẩm
+    short: Trang phục
+    blocks:
+      - type: text
+        body: |-
+          Tên gọi "Đen" và "Hoa" xuất phát từ màu sắc và cách trang trí trang phục, nên đây là phần dễ nhận biết nhất khi so sánh hai nhóm. Vải được dệt thủ công từ bông và nhuộm chàm; phụ nữ thường tự dệt, nhuộm, thêu và may cho cả gia đình. Dù thuộc nhóm nào, trang phục nữ cũng có yếm thêu hoa văn kỹ, kèm cúc bạc và đồng bạc.
+      - type: compare
+        title: Trang phục Hà Nhì Đen và Hà Nhì Hoa
+        items:
+          - title: Hà Nhì Đen
+            points:
+              - Tông trầm, chủ yếu chàm đen, xanh và trắng, nhã nhặn.
+              - Hoa văn viền uốn cong như sóng nước, mây bay ở cổ áo, ngực, tay áo và gấu áo; đính cúc bạc, hạt cườm nhỏ.
+              - Khăn đội đầu dùng để phân biệt tuổi và hoàn cảnh gia đình; phụ nữ lớn tuổi đã có gia đình quấn khăn cùng mái tóc giả khá lớn.
+              - Nam mặc áo ngắn hoặc dài đến hông, quần ống rộng màu chàm đen, rất ít họa tiết.
+          - title: Hà Nhì Hoa
+            points:
+              - Một trong những bộ trang phục cầu kỳ nhất vùng cao, gam màu nóng sặc sỡ như hoa núi rừng Tây Bắc.
+              - Màu sắc rực rỡ phần nào giúp xua bớt cái lạnh của mùa đông miền biên viễn.
+              - Phụ nữ mặc bộ đội đầu, áo dài trong, áo ngắn ngoài và quần; thêu, đính nhiều màu đỏ, vàng, xanh, trắng trên nền chàm.
+              - Mũ được trang trí nổi bật, là điểm nhấn để phân biệt với nhóm Đen.
+      - type: gallery
+        items:
+          - photo: ha-nhi/02
+            caption: "Thiếu nữ Hà Nhì Đen"
+            credit: "Báo Quân đội nhân dân"
+          - photo: ha-nhi/10
+            caption: "Trẻ em và phụ nữ Hà Nhì Đen"
+            credit: "Eva.vn"
+          - photo: ha-nhi/11
+            caption: "Phụ nữ Hà Nhì Đen với khăn đội đầu"
+            credit: "VietNamNet"
+          - photo: ha-nhi/12
+            caption: "Phụ nữ Hà Nhì Hoa"
+            credit: "VOV"
+      - type: did
+        body: Ống tay áo của phụ nữ Hà Nhì Hoa được ghép từ nhiều mảnh vải nhỏ. Người trung niên, người già dùng mảnh màu trầm; thiếu nữ và phụ nữ trẻ dùng màu tươi sáng tượng trưng cho bảy sắc cầu vồng. Nhìn ống tay áo có thể đoán tuổi người mặc.
+  - id: festivals
+    title: Lễ hội & tín ngưỡng
+    short: Lễ hội
+    blocks:
+      - type: text
+        body: |-
+          Tết lớn nhất của người Hà Nhì là **Tết Khô Già Già**, thường vào khoảng tháng 6 âm lịch và kéo dài vài ngày. Đây là dịp cúng tổ tiên và thần linh, cầu mùa màng tốt tươi; cả làng cùng ăn uống, ca hát.
+      - type: steps
+        title: Một số nghi thức của Khô Già Già
+        items:
+          - title: Chuẩn bị nơi cúng
+            body: Dân bản cùng dựng lại lán thờ cúng, các gia đình góp cỏ tranh để lợp mái.
+          - title: Lễ cúng tạ ơn
+            body: Lễ cúng trâu tạ ơn thần linh đã che chở dân làng, cùng lễ lấy nước thiêng và rước lễ vật đến nơi cúng.
+          - title: Lễ cầu mùa
+            body: Ngày quan trọng nhất của lễ hội, cầu mưa thuận gió hòa, mùa màng bội thu.
+          - title: Vui chơi cộng đồng
+            body: Sau phần lễ là các trò chơi dân gian như đu dây, đu quay; thịt lễ được chia cho các gia đình để cúng tổ tiên.
+      - type: gallery
+        title: Không khí ngày Tết
+        items:
+          - photo: ha-nhi/13
+            caption: "Dân bản cùng chuẩn bị cho ngày Tết"
+            credit: "Du lịch Tây Bắc"
+          - photo: ha-nhi/14
+            caption: "Mâm cỗ thắp nến trong dịp Tết"
+            credit: "Du lịch Tây Bắc"
+      - type: text
+        body: |-
+          Ngoài Tết Khô Già Già còn có nhiều lễ cúng thần rừng, thần làng và lễ cúng mùa gắn với chu kỳ nông nghiệp. Người Hà Nhì theo tín ngưỡng đa thần, tin rằng núi, rừng, nước, cây cối đều có linh hồn; vì thế họ có tập quán bảo vệ rừng thiêng và nguồn nước. Thờ cúng tổ tiên là nét rất quan trọng, thể hiện lòng biết ơn và sự gắn bó dòng tộc.
+      - type: did
+        body: Trong lễ hội Khô Già Già, trưởng bản công bố các quy ước của cộng đồng về bảo vệ rừng, giữ nguồn nước và giữ gìn môi trường.
+  - id: music
+    title: Âm nhạc & nhạc cụ
+    short: Âm nhạc
+    blocks:
+      - type: cards
+        columns: 3
+        items:
+          - name: Đàn tròn
+            sub: hó tờ
+            photo: ha-nhi/16
+            credit: "Báo Lào Cai"
+            body: Đàn 4 dây, bầu đàn hình tròn bằng gỗ tốt. Chỉ nam giới dùng, để đệm hát, múa và hát giao duyên.
+          - name: Tù và
+            sub: có tu
+            body: Làm từ sừng trâu, treo ở gian giữa nhà; thổi làm tín hiệu báo họp thôn. Chỉ nam giới dùng.
+          - name: Sáo dọc
+            sub: pí si
+            photo: ha-nhi/17
+            credit: "VnExpress"
+            body: Làm từ trúc hoặc nứa già, có 7 lỗ bấm; âm thanh êm dịu. Thanh niên thổi khi lên nương và đệm cho hát dân ca.
+          - name: Sáo ngang
+            sub: sé pi
+            photo: ha-nhi/18
+            credit: "VOV"
+            body: Giống sáo dọc về đặc điểm, thường được trai gái dùng khi hát giao duyên.
+          - name: Đàn nhị
+            sub: si vu, lạ khư
+            body: Hai dây, bầu đàn làm từ ống tre già; âm thanh réo rắt, trầm trầm, dùng chủ yếu khi hát giao duyên.
+  - id: food
+    title: Ẩm thực
+    short: Ẩm thực
+    blocks:
+      - type: text
+        body: |-
+          Bữa ăn của người Hà Nhì chủ yếu từ lúa, ngô, rau rừng và thịt gia súc. Trong các dịp lễ có bánh dày, thịt lợn và rượu gạo. Cả làng thường cùng nhau ăn uống, chia sẻ.
+      - type: figure
+        photo: ha-nhi/15
+        caption: "Nguyên liệu và gia vị trong bữa ăn của người Hà Nhì"
+        credit: "Tạp chí Văn nghệ Quân đội"
+  - id: family
+    title: Gia đình & phong tục vòng đời
+    short: Gia đình
+    blocks:
+      - type: text
+        body: |-
+          Gia đình người Hà Nhì theo chế độ **phụ hệ**: con cái mang họ cha, tài sản truyền theo dòng họ cha. Trai gái được tự do tìm hiểu, nhưng việc cưới xin có nhiều nghi lễ và có vai trò của gia đình, dòng họ.
+      - type: did
+        title: Tục nối tên cha
+        body: Ở nhiều nơi, chữ cuối trong tên của cha được dùng làm chữ đầu trong tên của con. Nhờ vậy, con cháu có thể nhớ được tổ tiên qua nhiều đời.
+  - id: today
+    title: Di sản hôm nay
+    short: Di sản hôm nay
+    blocks:
+      - type: text
+        body: |-
+          Người Hà Nhì đề cao tinh thần cộng đồng: dân làng cùng nhau làm nhà, cúng lễ và giúp đỡ nhau trong mùa vụ. Từ cách chọn đất ở, làm ruộng bậc thang đến cách cúng bái, tất cả đều thể hiện mong muốn sống hài hòa, thuận theo thiên nhiên.
+
+          Ngày nay, lễ hội Khô Già Già và vẻ đẹp bản làng nhà trình tường giữa mây trời Y Tý thu hút nhiều du khách, góp phần gìn giữ bản sắc văn hóa Hà Nhì.
+quiz:
+  - question: Tường nhà truyền thống của người Hà Nhì được làm bằng gì?
+    options: [Gỗ ghép, Đất nện, Đá xếp, Tre nứa]
+    answer: 1
+  - question: Tết lớn nhất của người Hà Nhì là gì?
+    options: [Tết Khô Già Già, Lễ cúng bến nước, Lễ nhảy lửa, Lễ mừng cơm mới]
+    answer: 0
+  - question: Ở nhóm Hà Nhì Hoa, chi tiết nào giúp đoán tuổi người mặc?
+    options: [Màu của váy, Ống tay áo ghép nhiều mảnh, Số cúc bạc, Kiểu giày]
+    answer: 1
+chat:
+  greeting: Chào bạn, mình là người dẫn đường của phòng Hà Nhì. Bạn muốn biết thêm về nhà trình tường, Tết Khô Già Già hay trang phục Hà Nhì Đen và Hà Nhì Hoa?
+  suggestions:
+    - Nhà trình tường giữ ấm thế nào?
+    - Tết Khô Già Già có những nghi thức gì?
+    - Hà Nhì Đen và Hà Nhì Hoa khác nhau ra sao?
+    - Tục nối tên cha là gì?
+sources:
+  - title: Tài liệu nghiên cứu của nhóm – Dân tộc Hà Nhì
+  - title: Tết Khô Già Già – bản sắc văn hóa của đồng bào Hà Nhì ở Lào Cai (VietnamPlus, 2026)
+    url: https://www.vietnamplus.vn/tet-kho-gia-gia-ban-sac-van-hoa-cua-dong-bao-ha-nhi-o-lao-cai-post1125861.vnp
+  - title: Ảnh tư liệu trong tài liệu nhóm – Báo Sức khỏe & Đời sống, Báo Quân đội nhân dân, Báo Lào Cai, VOV, Báo Lao Động (cần xin phép trước khi dùng)

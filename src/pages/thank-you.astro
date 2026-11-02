@@ -1,0 +1,184 @@
+---
+// Closing page – "Trang cuối sổ".
+import BaseLayout from '../layouts/BaseLayout.astro';
+import StampSlot from '../components/StampSlot.astro';
+import MemberCard from '../components/MemberCard.astro';
+import Icon from '../components/Icon.astro';
+import { getGroups } from '../lib/groups';
+import { team } from '../data/team';
+
+const groups = await getGroups();
+const palette: Record<string, string> = { 'ha-nhi': '#34466B', 'pa-then': '#B23A2A', ede: '#8A4B2C' };
+const bands = groups.map((g, i) => ({ y: i * 24, color: palette[g.data.accent] ?? '#3F5B45' }));
+const diamonds = Array.from({ length: 36 }, (_, i) => 10 + i * 28);
+const sources = groups.flatMap((g) => g.data.sources.map((s) => ({ ...s, group: g.data.name })));
+
+// Collect every photo credit used in the content files, per ethnic group.
+function collectCredits(value: unknown, out: Set<string>) {
+  if (Array.isArray(value)) value.forEach((v) => collectCredits(v, out));
+  else if (value && typeof value === 'object') {
+    const o = value as Record<string, unknown>;
+    if (typeof o.photo === 'string' && typeof o.credit === 'string') out.add(o.credit);
+    Object.values(o).forEach((v) => collectCredits(v, out));
+  }
+}
+const photoCredits = groups.map((g) => {
+  const set = new Set<string>();
+  collectCredits(g.data, set);
+  return { group: g.data.name, credits: [...set].sort((a, b) => a.localeCompare(b, 'vi')) };
+});
+---
+<BaseLayout title="Trang cuối sổ" nav="sources">
+  <section class="container end-top" aria-labelledby="closing-title">
+    <div>
+      <p class="eyebrow">Lời kết</p>
+      <h1 class="h1 end-title" id="closing-title">Hành trình sắc màu Việt Nam</h1>
+      <div class="prose lead">
+        <p>Mỗi dân tộc là một sắc màu riêng, mỗi phong tục là một câu chuyện và mỗi nét văn hóa đều góp phần tạo nên bức tranh đa dạng, giàu bản sắc của Việt Nam.</p>
+        <p>Thông qua hành trình khám phá văn hóa các dân tộc Ê Đê, Pà Thẻn và Hà Nhì, Việt Sắc Ký mong muốn mang đến những góc nhìn gần gũi, giúp mọi người hiểu hơn, trân trọng hơn những giá trị truyền thống vẫn đang được gìn giữ qua bao thế hệ.</p>
+        <p>Bởi văn hóa không chỉ là những gì thuộc về quá khứ, mà còn là di sản sống động cần được tiếp nối và lan tỏa đến tương lai.</p>
+      </div>
+      <p class="small end-hint" data-passport-incomplete>
+        Sổ của bạn mới có <span data-passport-count>0</span>/{groups.length} con dấu. Bạn có thể quay lại các phòng còn thiếu bất cứ lúc nào.
+      </p>
+    </div>
+    <div class="card book">
+      <p class="caption book__caption">Sổ hành trình · <span data-passport-count>0</span>/{groups.length} con dấu</p>
+      <div class="book__stamps">
+        {groups.map((g, i) => (
+          <StampSlot slug={g.id} symbol={g.data.symbol} name={g.data.name} label={`Chặng ${i + 1}`} color={`var(--${g.data.accent})`} rotate={[-12, 8, -6][i % 3]} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="band message" aria-label="Khẩu hiệu dự án">
+    <div class="container message__inner">
+      <svg class="weave" viewBox={`0 0 1000 ${bands.length * 24}`} aria-hidden="true">
+        {bands.map((b) => (
+          <g>
+            <rect x="0" y={b.y} width="1000" height="22" fill={b.color} />
+            {diamonds.map((x) => <path d={`M${x} ${b.y + 11} l7 -7 l7 7 l-7 7 z`} fill="#F6F0E3" fill-opacity="0.85" />)}
+          </g>
+        ))}
+      </svg>
+      <p class="slogan"><strong>Việt Sắc Ký</strong> – Lưu giữ sắc màu, lan tỏa hồn Việt.</p>
+    </div>
+  </section>
+
+  <section class="container thanks" aria-labelledby="thanks-title">
+    <p class="eyebrow">Lời cảm ơn</p>
+    <h2 class="h2" id="thanks-title">Cảm ơn bạn đã đồng hành</h2>
+    <div class="prose lead">
+      <p>Cảm ơn bạn đã dành thời gian đồng hành cùng Việt Sắc Ký trên hành trình khám phá những nét đẹp văn hóa của các dân tộc Việt Nam.</p>
+      <p>Hy vọng rằng sau hành trình này, mỗi chúng ta sẽ thêm yêu, thêm tự hào và có ý thức gìn giữ những giá trị văn hóa truyền thống của quê hương.</p>
+    </div>
+  </section>
+
+  <section class="container project" id="project" aria-labelledby="project-title">
+    <h2 class="h3" id="project-title">Thông tin dự án</h2>
+    <dl class="card project__info">
+      <div><dt>Tên dự án</dt><dd>Việt Sắc Ký</dd></div>
+      <div><dt>Đơn vị thực hiện</dt><dd>Nhóm Mèo Méo Meo</dd></div>
+      <div><dt>Năm thực hiện</dt><dd>2026</dd></div>
+      <div class="project__wide">
+        <dt>Mục đích</dt>
+        <dd>Giới thiệu, quảng bá và lan tỏa những nét đẹp văn hóa truyền thống của các dân tộc Việt Nam; góp phần nâng cao nhận thức, khơi gợi niềm tự hào và ý thức gìn giữ bản sắc văn hóa dân tộc trong cộng đồng, đặc biệt là thế hệ trẻ.</dd>
+      </div>
+    </dl>
+  </section>
+
+  <section class="container team" id="team" aria-labelledby="team-title">
+    <p class="eyebrow">Những người thực hiện</p>
+    <h2 class="h2" id="team-title">Nhóm Mèo Méo Meo</h2>
+    <div class="team__grid">
+      {team.map((m) => <MemberCard member={m} />)}
+    </div>
+  </section>
+
+  <section class="container refs" id="sources" aria-labelledby="sources-heading">
+    <div>
+      <h2 class="h3" id="sources-heading">Nguồn tham khảo</h2>
+      <ul>
+        {sources.map((s) => (
+          <li><span class="refs__group">{s.group}:</span> {s.url ? <a href={s.url} target="_blank" rel="noopener noreferrer">{s.title}</a> : s.title}</li>
+        ))}
+        <li>Quốc hội chốt cả nước còn 34 tỉnh, thành phố (Cổng TTĐT Hà Tĩnh, 2025) – dùng cho tên tỉnh mới.</li>
+      </ul>
+    </div>
+    <div>
+      <h2 class="h3">Ghi công hình ảnh</h2>
+      <ul>
+        {photoCredits.map((c) => (
+          <li><span class="refs__group">Ảnh tư liệu – {c.group}:</span> {c.credits.join(', ')}</li>
+        ))}
+        <li>Ảnh tư liệu được trích từ tài liệu nghiên cứu của nhóm, ghi nguồn dưới từng ảnh. Bản quyền thuộc về các tác giả và cơ quan báo chí; website chỉ dùng cho mục đích học tập.</li>
+        <li>Minh họa màu nước và bản đồ (có quần đảo Hoàng Sa, Trường Sa): nhóm thực hiện.</li>
+      </ul>
+      <h2 class="h3 refs__ai">Về người dẫn đường AI</h2>
+      <p class="small">Chatbox trả lời dựa trên tư liệu của nhóm và có thể sai. Website không lưu tên hay thông tin cá nhân của người dùng.</p>
+    </div>
+  </section>
+
+  <div class="container end-cta">
+    <a class="btn btn-primary btn-lg" href="/">Đi lại hành trình</a>
+    <button class="btn btn-secondary btn-lg" type="button" data-share>Chia sẻ dự án</button>
+    <button class="btn btn-ghost" type="button" data-reset>Xóa sổ hành trình</button>
+  </div>
+</BaseLayout>
+
+<script>
+  import { resetPassport } from '../scripts/passport';
+  const share = document.querySelector<HTMLButtonElement>('[data-share]');
+  if (share) share.addEventListener('click', async () => {
+    const url = `${location.origin}/`;
+    const data = { title: 'Việt Sắc Ký', text: 'Hành trình khám phá văn hóa các dân tộc Việt Nam', url };
+    try {
+      if (navigator.share) await navigator.share(data);
+      else {
+        await navigator.clipboard.writeText(url);
+        share.textContent = 'Đã sao chép đường dẫn';
+      }
+    } catch {
+      /* user cancelled */
+    }
+  });
+  document.querySelector('[data-reset]')?.addEventListener('click', () => resetPassport());
+</script>
+
+<style>
+  .end-top { display: grid; grid-template-columns: minmax(0, 600px) minmax(0, 1fr); gap: 72px; align-items: center; padding-block: 96px 80px; }
+  .end-title { font-size: clamp(40px, 6vw, 64px); margin: 10px 0 22px; }
+  .end-hint { margin-top: 16px; }
+  .book { padding: 24px 32px 32px; border-radius: 16px; box-shadow: 0 10px 30px rgba(60, 40, 20, 0.12); background-image: linear-gradient(90deg, transparent calc(50% - 0.5px), var(--line) calc(50% - 0.5px), var(--line) calc(50% + 0.5px), transparent calc(50% + 0.5px)); }
+  .book__stamps { display: flex; flex-wrap: wrap; justify-content: space-around; gap: 24px; margin-top: 24px; }
+  .end-top .prose p + p { margin-top: 14px; }
+  .message__inner { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 28px; padding-block: 64px; }
+  .weave { width: min(1000px, 100%); height: auto; }
+  .slogan { font-family: var(--font-serif); font-style: italic; font-size: clamp(24px, 3.2vw, 36px); line-height: 1.35; color: var(--green-dark); max-width: 900px; }
+  .slogan strong { font-style: normal; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
+  .thanks { padding-top: 88px; max-width: 860px; text-align: center; }
+  .thanks .h2 { margin: 8px 0 20px; }
+  .thanks .prose p + p { margin-top: 14px; }
+  .project { padding-top: 72px; }
+  .project__info { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; margin-top: 16px; overflow: hidden; }
+  .project__info > div { padding: 20px 24px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .project__info > div:nth-child(3) { border-right: none; }
+  .project__info .project__wide { grid-column: 1 / -1; border-right: none; border-bottom: none; }
+  .project__info dt { font-size: 14px; color: var(--ink-soft); }
+  .project__info dd { margin: 4px 0 0; font-family: var(--font-serif); font-weight: 600; font-size: 20px; line-height: 1.4; }
+  .project__wide dd { font-family: var(--font-sans); font-weight: 400; font-size: 17px; line-height: 1.65; }
+  .team { padding-top: 88px; }
+  .team__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; margin-top: 36px; }
+  .refs { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; padding-top: 80px; }
+  .refs ul { margin-top: 12px; padding-left: 18px; font-size: 14px; line-height: 1.9; color: var(--ink-soft); }
+  .refs__group { font-weight: 600; color: var(--ink); }
+  .refs__ai { margin-top: 28px; margin-bottom: 8px; }
+  .end-cta { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 16px; padding-top: 72px; }
+  @media (max-width: 900px) {
+    .end-top, .refs { grid-template-columns: 1fr; gap: 32px; }
+    .project__info { grid-template-columns: 1fr; }
+    .project__info > div { border-right: none; }
+    .end-top { padding-block: 48px; }
+  }
+</style>

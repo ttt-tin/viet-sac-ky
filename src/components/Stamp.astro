@@ -1,0 +1,18 @@
+---
+interface Props {
+  top?: string;
+  name: string;
+  sub?: string;
+  /** CSS color, e.g. 'var(--ha-nhi)'. Defaults to the stamp red. */
+  color?: string;
+  rotate?: number;
+  size?: number;
+}
+const { top = 'Đã ghé', name, sub, color, rotate = -10, size } = Astro.props;
+const style = [`--rot:${rotate}deg`, size && `--size:${size}px`, color && `--stamp-color:${color}`].filter(Boolean).join(';');
+---
+<div class="stamp" style={style} role="img" aria-label={`Con dấu ${name}${sub ? ' – ' + sub : ''}`}>
+  <span class="stamp__top">{top}</span>
+  <span class="stamp__name">{name}</span>
+  {sub && <span class="stamp__sub">{sub}</span>}
+</div>

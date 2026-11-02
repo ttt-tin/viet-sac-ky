@@ -1,0 +1,66 @@
+---
+import '@fontsource/lora/400.css';
+import '@fontsource/lora/600.css';
+import '@fontsource/lora/700.css';
+import '@fontsource/lora/400-italic.css';
+import '@fontsource/be-vietnam-pro/400.css';
+import '@fontsource/be-vietnam-pro/500.css';
+import '@fontsource/be-vietnam-pro/600.css';
+import '@fontsource/be-vietnam-pro/700.css';
+import '@fontsource/patrick-hand/400.css';
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import type { NavKey } from '../lib/nav';
+import Footer from '../components/Footer.astro';
+import Lightbox from '../components/Lightbox.astro';
+import { getGroups } from '../lib/groups';
+
+interface Props {
+  title: string;
+  description?: string;
+  theme?: 'ha-nhi' | 'pa-then' | 'ede';
+  nav?: NavKey;
+  /** Hide header and footer (used by the intro "book cover" page). */
+  bare?: boolean;
+}
+const {
+  title,
+  description = 'Việt Sắc Ký – hành trình khám phá văn hóa các dân tộc Hà Nhì, Pà Thẻn và Ê Đê qua một bảo tàng thu nhỏ trực tuyến.',
+  theme,
+  nav,
+  bare = false,
+} = Astro.props;
+const groups = await getGroups();
+const fullTitle = title === 'Việt Sắc Ký' ? title : `${title} · Việt Sắc Ký`;
+---
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:locale" content="vi_VN" />
+    <meta name="theme-color" content="#2C4233" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body class:list={[theme && `theme-${theme}`]} data-passport-groups={groups.map((g) => g.id).join(',')}>
+    <a class="skip-link" href="#main">Bỏ qua, đến nội dung chính</a>
+    {!bare && <Header active={nav} total={groups.length} />}
+    <main id="main">
+      <slot />
+    </main>
+    {!bare && <Footer />}
+    <Lightbox />
+    <slot name="after" />
+    <script>
+      import { renderPassport, STAMP_EVENT } from '../scripts/passport';
+      renderPassport();
+      document.addEventListener(STAMP_EVENT, () => renderPassport());
+      window.addEventListener('pageshow', () => renderPassport());
+      window.addEventListener('storage', () => renderPassport());
+    </script>
+  </body>
+</html>

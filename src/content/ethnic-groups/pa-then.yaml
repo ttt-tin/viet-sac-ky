@@ -1,0 +1,280 @@
+name: Pà Thẻn
+autonym: Pạ Hưng
+order: 2
+symbol: Lửa
+accent: pa-then
+illustration: pa-then
+heroPhoto:
+  photo: pa-then/11
+  caption: Phụ nữ Pà Thẻn trong trang phục truyền thống
+  credit: dangcongsan.vn
+tagline: Ngọn lửa thiêng và sắc đỏ bên thung lũng sông Lô.
+intro: >-
+  Giữa những thung lũng quanh sông Lô, người Pà Thẻn giữ ngọn lửa thiêng qua lễ nhảy lửa
+  và những bộ váy áo đỏ rực như than hồng.
+map:
+  lon: 105.05
+  lat: 22.30
+  label: right
+facts:
+  - label: Dân số (2019)
+    value: 8.248 người
+  - label: Ngữ hệ
+    value: H'Mông – Miền
+  - label: Địa bàn chính
+    value: Tuyên Quang
+    note: gồm Hà Giang cũ
+  - label: Độ cao cư trú
+    value: 500–1.000 m
+  - label: Di sản
+    value: Lễ nhảy lửa
+    note: Di sản văn hóa phi vật thể quốc gia, 2023
+sections:
+  - id: origins
+    title: Nguồn gốc & ngôn ngữ
+    short: Nguồn gốc
+    blocks:
+      - type: text
+        body: |-
+          Người Pà Thẻn, còn gọi là Pá Hưng hay Pạ Hưng, là một trong 54 dân tộc của Việt Nam. Theo tư liệu, tổ tiên của họ di cư đến Việt Nam cách đây khoảng 200–300 năm và chọn vùng đồi núi thấp làm nơi định cư lâu dài.
+
+          Tiếng Pà Thẻn (tiếng Pạ Hưng) thuộc ngữ tộc H'Mông của **ngữ hệ H'Mông – Miền**. Cộng đồng gắn kết quanh tám dòng họ, mỗi dòng họ có tên gọi riêng trong tiếng mẹ đẻ.
+      - type: cards
+        title: Tám dòng họ Pà Thẻn
+        columns: 4
+        items:
+          - name: Xìn
+            sub: Cạ Cumg, Cạ Sợ
+          - name: Làn
+            sub: Cạ Lan
+          - name: Ván
+            sub: Cạ Tè
+          - name: Hủng
+            sub: Cạ Hũmg
+          - name: Lừu
+            sub: Cạ Lioo
+          - name: Phù
+            sub: Cạ Bôz
+          - name: Tẩn
+            sub: Cạ Tín (cần đối chiếu)
+          - name: Tải
+            sub: Cạ Tơ
+      - type: did
+        body: Người Pà Thẻn từng có chữ viết cổ của riêng mình.
+      - type: figure
+        photo: pa-then/01
+        caption: "Một trang tư liệu về chữ cổ Pà Thẻn"
+        credit: "quehuongonline.vn"
+  - id: land
+    title: Vùng đất & cảnh quan
+    short: Vùng đất
+    blocks:
+      - type: text
+        body: |-
+          Theo Tổng điều tra dân số năm 2019, người Pà Thẻn có 8.248 người, phần lớn sống ở nông thôn. Họ cư trú chủ yếu ở vùng trung du và miền núi phía Bắc: Hà Giang cũ có 6.502 người, Tuyên Quang cũ có 1.258 người; từ năm 2025 cả hai vùng này đều thuộc tỉnh **Tuyên Quang**.
+
+          Địa bàn cư trú của người Pà Thẻn thấp hơn nhiều dân tộc khác, chủ yếu là đồi núi và thung lũng quanh sông Lô, độ cao trung bình 500–1.000 m. Bản thường nằm ven suối, thung lũng hoặc triền núi thấp; có bản đông tới 150–250 nóc nhà.
+      - type: gallery
+        items:
+          - photo: pa-then/02
+            caption: "Đồi núi và ruộng bậc thang nơi người Pà Thẻn sinh sống"
+            credit: "cungphuot.info"
+          - photo: pa-then/03
+            caption: "Bản làng Pà Thẻn bên thung lũng"
+            credit: "Bảo tàng Dân tộc học Việt Nam"
+          - photo: pa-then/04
+            caption: "Đồng bào Pà Thẻn cấy lúa"
+            credit: "Bảo tàng Dân tộc học Việt Nam"
+      - type: list
+        title: Sinh kế truyền thống
+        items:
+          - Trồng lúa nước, làm nương rẫy; lúa và ngô là cây lương thực chính.
+          - Trồng chè Shan tuyết.
+          - Dệt vải, thêu thổ cẩm để may trang phục và làm sản phẩm bán cho khách du lịch.
+  - id: house
+    title: Nhà ở
+    short: Nhà ở
+    blocks:
+      - type: text
+        body: |-
+          Nhà truyền thống của người Pà Thẻn là **nhà nền đất**, rộng khoảng 100 m², chia ba gian, không có chái. Bộ khung là vì kèo ba cột, liên kết bằng ngoãm và buộc lạt; mái chằm bằng lá cọ, hai đầu hồi thưng gỗ thoáng để lấy ánh sáng.
+      - type: figure
+        photo: pa-then/08
+        caption: "Nhà truyền thống của người Pà Thẻn"
+        credit: "Facebook “Du lịch bản làng dân tộc”"
+      - type: cards
+        columns: 3
+        items:
+          - name: Gian hồi bên phải
+            body: Phía trước đặt giường của bố mẹ chủ nhà; phía sau là phòng của con gái.
+          - name: Gian chính giữa
+            body: Đằng trước có cửa ra vào.
+          - name: Cột cái
+            body: Nơi treo các vật kỷ niệm hoặc xương thú mà chủ nhà săn được.
+  - id: costume
+    title: Trang phục & thổ cẩm
+    short: Trang phục
+    blocks:
+      - type: text
+        body: |-
+          Trang phục truyền thống của phụ nữ Pà Thẻn kín đáo từ bàn chân, ống chân đến đỉnh đầu, lấy **màu đỏ** làm chủ đạo, điểm thêm chàm, trắng, vàng, đen và những chiếc vòng bạc trắng. Khăn đội đầu được quấn cầu kỳ, hai đầu khăn thêu hoa văn và có tua kim tuyến.
+
+          Hoa văn được dệt ngay trên khung cửi. Sau đó, người phụ nữ cắt nhỏ các mảnh vải đỏ, trắng, xanh, đen và ghép với những mảnh vải thêu, nên bộ trang phục luôn rực rỡ nhiều sắc màu. Trang phục nam giản dị hơn: áo cánh ngắn xẻ ngực và quần lá tọa bằng vải lanh hoặc bông nhuộm chàm.
+      - type: gallery
+        items:
+          - photo: pa-then/10
+            caption: "Phụ nữ Pà Thẻn trong trang phục đỏ"
+            credit: "dangcongsan.vn"
+          - photo: pa-then/09
+            caption: "Trang phục nam Pà Thẻn"
+            credit: "Sand Outfit"
+          - photo: pa-then/12
+            caption: "Bà Tần Thị Viện bên khung dệt"
+            credit: "special.nhandan.vn"
+          - photo: pa-then/13
+            caption: "Dệt hoa văn trên khung cửi"
+            credit: "special.nhandan.vn"
+      - type: cards
+        title: Một số hoa văn trên trang phục
+        columns: 4
+        items:
+          - name: Con chó
+            body: Hình con vật gắn liền với cuộc sống.
+          - name: Đầu người
+            body: Phản ánh quan niệm về con người.
+          - name: Rắn nước
+            body: Gắn với thiên nhiên, sông suối.
+          - name: Chữ A
+            body: Họa tiết hình học.
+      - type: did
+        title: Vì sao là màu đỏ?
+        body: Người Pà Thẻn quan niệm màu đỏ là màu của lửa, của niềm tin và ánh sáng. Thần lửa là vị thần thiêng liêng của dân tộc, vì vậy trang phục nữ lấy màu đỏ làm màu chủ lực.
+  - id: festivals
+    title: Lễ hội & tín ngưỡng
+    short: Lễ hội
+    blocks:
+      - type: badge
+        text: Di sản văn hóa phi vật thể quốc gia · 2023
+      - type: text
+        body: |-
+          **Lễ nhảy lửa** là nét văn hóa nổi tiếng nhất của người Pà Thẻn. Nghi lễ thường diễn ra từ tháng 10 âm lịch đến tháng Giêng năm sau, khi mùa màng đã thu hoạch xong. Người Pà Thẻn tin rằng thần lửa mang lại ấm no, xua đuổi tà ma và bảo vệ dân bản. Năm 2023, Lễ nhảy lửa của người Pà Thẻn ở Tuyên Quang được ghi danh là Di sản văn hóa phi vật thể quốc gia.
+      - type: figure
+        photo: pa-then/15
+        caption: "Nhảy lửa trên đống than hồng"
+        credit: "Cổng thông tin điện tử tỉnh Tuyên Quang"
+      - type: steps
+        title: Hai phần của lễ nhảy lửa
+        items:
+          - title: Cúng mời thần
+            photo: pa-then/14
+            credit: "dangcongsan.vn"
+            body: Thầy cúng làm lễ mời thần linh, cầu mong một năm mùa màng bội thu, sức khỏe dồi dào, xua đuổi tà ma và bảo vệ bản làng.
+          - title: Nhảy lửa
+            body: Các chàng trai được thầy cúng làm lễ "nhập vai", rồi bước chân trần vào đống than hồng cho đến khi lửa tắt.
+      - type: text
+        body: |-
+          **Lễ kéo chày** là một tục lệ cộng đồng sau ngày mùa, cầu mong thần linh phù hộ mưa thuận gió hòa. Thầy cúng dùng một chiếc chày gỗ hoặc vầu dài khoảng 2,5–3 m, vừa xoay chày vừa đọc thần chú; theo lời kể của người Pà Thẻn, chiếc chày tự nâng lên khiến nhiều thanh niên cùng kéo cũng không xuống được.
+      - type: figure
+        photo: pa-then/16
+        caption: "Lễ kéo chày"
+        credit: "dotchuoinon.com"
+  - id: food
+    title: Ẩm thực
+    short: Ẩm thực
+    blocks:
+      - type: text
+        body: |-
+          **Bánh dày** là món không thể thiếu trong mâm cúng Tết của người Pà Thẻn. Bánh không chỉ mang ý nghĩa thiêng liêng trong cúng bái mà còn thể hiện tinh thần đoàn kết, sum vầy của gia đình.
+      - type: steps
+        title: Các bước làm bánh dày
+        items:
+          - title: Sàng sảy gạo nếp
+            photo: pa-then/17
+            credit: "vietnam.vnanet.vn"
+            body: Chọn gạo nếp ngon, sàng sảy để loại bỏ sạn.
+          - title: Giã nhuyễn trong cối
+            photo: pa-then/18
+            credit: "vietnam.vnanet.vn"
+            body: Gạo được giã nhuyễn trong cối.
+          - title: Nặn thành hình tròn
+            photo: pa-then/19
+            credit: "vietnam.vnanet.vn"
+            body: Nặn bánh tròn, bán kính khoảng 10 cm.
+  - id: family
+    title: Gia đình & phong tục vòng đời
+    short: Gia đình
+    blocks:
+      - type: text
+        body: |-
+          Gia đình người Pà Thẻn chủ yếu là gia đình nhỏ, theo chế độ **phụ hệ**. Người chồng và con trai trưởng giữ vai trò quyết định những việc quan trọng; con cái mang họ cha, con trai thừa kế tài sản và lo việc thờ cúng tổ tiên.
+      - type: list
+        title: Hôn nhân
+        items:
+          - Một vợ một chồng là chế độ hôn nhân cơ bản và bền vững.
+          - Nghiêm cấm kết hôn giữa những người cùng dòng họ.
+          - Trai gái tìm hiểu khá cởi mở; hôn nhân có thể do tự nguyện hoặc qua mai mối, nhưng đều cần cha mẹ hai bên đồng ý.
+          - Đám cưới gồm nhiều bước như dạm hỏi, xin dâu, dùng ô che khi đón dâu và nghi thức cầu bình an.
+      - type: gallery
+        title: Đám cưới Pà Thẻn
+        items:
+          - photo: pa-then/20
+            caption: "Nhà trai che ô đi đón dâu"
+            credit: "Báo Sức khỏe & Đời sống"
+          - photo: pa-then/21
+            caption: "Chú rể ngậm khăn khi đi đón dâu"
+            credit: "Báo Sức khỏe & Đời sống"
+          - photo: pa-then/22
+            caption: "Chiếc khăn sau đó được dùng để che mặt cô dâu"
+            credit: "Báo Sức khỏe & Đời sống"
+      - type: did
+        title: Tục ở rể
+        body: Người Pà Thẻn có tục ở rể tạm thời (tối đa 12 năm) và ở rể đời. Khi nhà gái không có con trai, chàng rể ở hẳn bên nhà vợ và con cái có thể mang họ mẹ.
+  - id: today
+    title: Di sản hôm nay
+    short: Di sản hôm nay
+    blocks:
+      - type: text
+        body: |-
+          Việc giữ gìn văn hóa Pà Thẻn gắn với phát triển du lịch cộng đồng đang được quan tâm. Du khách có thể ở homestay trong không gian văn hóa truyền thống và tự mình trải nghiệm đời sống của đồng bào.
+      - type: list
+        items:
+          - Tìm hiểu phong tục và mặc thử trang phục Pà Thẻn.
+          - Tự tay giã bánh dày và cùng nấu các món ăn truyền thống.
+          - Hái chè và tham gia công việc nương rẫy.
+          - Học thêu, dệt thổ cẩm từ các lớp truyền dạy trong thôn.
+      - type: gallery
+        items:
+          - photo: pa-then/05
+            caption: "Lớp truyền dạy thêu, dệt thổ cẩm"
+            credit: "Cục Du lịch Quốc gia Việt Nam"
+          - photo: pa-then/06
+            caption: "Cùng giã bánh dày"
+            credit: "vietnam.vnanet.vn"
+          - photo: pa-then/07
+            caption: "Du khách mặc trang phục Pà Thẻn hái chè"
+            credit: "Cục Du lịch Quốc gia Việt Nam"
+      - type: did
+        title: Người giữ nghề
+        body: "Bà Tần Thị Viện ở thôn Mý Bắc học dệt từ năm 15 tuổi và đến nay vẫn ngồi khung cửi. Bà chia sẻ: “Nghề dệt vải không chỉ đơn thuần là một nghề thủ công mà còn là một nghệ thuật, thể hiện sự sáng tạo, khéo léo và trí tuệ của người phụ nữ Pà Thẻn.”"
+quiz:
+  - question: Lễ nhảy lửa của người Pà Thẻn được ghi danh Di sản văn hóa phi vật thể quốc gia năm nào?
+    options: ['2019', '2021', '2023', '2025']
+    answer: 2
+  - question: Với người Pà Thẻn, màu đỏ trên trang phục nữ tượng trưng cho điều gì?
+    options: [Màu của đất, Màu của lửa và ánh sáng, Màu của hoa rừng, Màu của mặt trời lặn]
+    answer: 1
+  - question: Theo tục ở rể tạm thời, chàng rể Pà Thẻn ở nhà vợ tối đa bao lâu?
+    options: [3 năm, 6 năm, 12 năm, Suốt đời]
+    answer: 2
+chat:
+  greeting: Chào bạn, mình là người dẫn đường của phòng Pà Thẻn. Bạn muốn biết thêm về lễ nhảy lửa, trang phục đỏ hay món bánh dày?
+  suggestions:
+    - Lễ nhảy lửa diễn ra như thế nào?
+    - Vì sao trang phục nữ Pà Thẻn màu đỏ?
+    - Tám dòng họ Pà Thẻn là những họ nào?
+    - Tục ở rể của người Pà Thẻn ra sao?
+sources:
+  - title: Tài liệu nghiên cứu của nhóm – Dân tộc Pà Thẻn
+  - title: Lễ nhảy lửa của người Pà Thẻn là Di sản văn hóa phi vật thể quốc gia (Báo Nhân Dân, 27/9/2023)
+    url: https://nhandan.vn/ocop/le-nhay-lua-cua-nguoi-pa-then-la-di-san-van-hoa-phi-vat-the-quoc-gia-post774604.html
+  - title: Ảnh tư liệu trong tài liệu nhóm – Bảo tàng Dân tộc học Việt Nam, dangcongsan.vn, vietnam.vnanet.vn, Cục Du lịch Quốc gia Việt Nam, special.nhandan.vn (cần xin phép trước khi dùng)

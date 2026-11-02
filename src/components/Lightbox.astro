@@ -1,0 +1,36 @@
+---
+// Shows a large version of any button with `data-lightbox="<image url>"`.
+---
+<dialog class="lightbox" data-lightbox-dialog aria-label="Ảnh phóng to">
+  <form method="dialog"><button class="lightbox__close" aria-label="Đóng ảnh">×</button></form>
+  <img alt="" data-lightbox-img />
+  <p class="lightbox__caption" data-lightbox-caption></p>
+</dialog>
+
+<script>
+  const dialog = document.querySelector<HTMLDialogElement>('[data-lightbox-dialog]');
+  const img = dialog?.querySelector<HTMLImageElement>('[data-lightbox-img]');
+  const caption = dialog?.querySelector<HTMLElement>('[data-lightbox-caption]');
+  if (dialog && img && caption) {
+    document.addEventListener('click', (e) => {
+      const trigger = (e.target as Element | null)?.closest<HTMLElement>('[data-lightbox]');
+      if (!trigger || !trigger.dataset.lightbox) return;
+      img.src = trigger.dataset.lightbox;
+      img.alt = trigger.querySelector('img')?.alt ?? '';
+      caption.textContent = trigger.dataset.caption ?? '';
+      dialog.showModal();
+    });
+    dialog.addEventListener('click', (e) => {
+      if (e.target === dialog) dialog.close();
+    });
+    dialog.addEventListener('close', () => img.removeAttribute('src'));
+  }
+</script>
+
+<style>
+  .lightbox { max-width: min(1200px, 94vw); max-height: 94vh; padding: 12px 12px 16px; border: none; background: #fffdf8; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4); }
+  .lightbox::backdrop { background: rgba(30, 26, 22, 0.8); }
+  .lightbox img { max-width: 100%; max-height: calc(94vh - 90px); width: auto; height: auto; margin: 0 auto; }
+  .lightbox__caption { margin-top: 10px; font-size: 14px; color: var(--ink-soft); }
+  .lightbox__close { position: absolute; right: 8px; top: 4px; width: 40px; height: 40px; border: none; background: rgba(255, 253, 248, 0.9); border-radius: 50%; font-size: 26px; line-height: 1; cursor: pointer; }
+</style>

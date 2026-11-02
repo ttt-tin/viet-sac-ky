@@ -1,0 +1,30 @@
+---
+// Decorative textile band between sections. Each ethnic group gets its own
+// simple motif, drawn in its accent color (placeholder for hand-drawn art).
+interface Props {
+  motif: 'ha-nhi' | 'pa-then' | 'ede';
+}
+const { motif } = Astro.props;
+const W = 1200;
+const steps = Array.from({ length: W / 12 + 1 }, (_, i) => i * 12);
+const zigzag = steps.map((x, i) => `${x},${i % 2 ? 18 : 4}`).join(' ');
+const waves = Array.from({ length: W / 40 }, (_, i) => `M${i * 40} 11 q10 -9 20 0 t20 0`).join(' ');
+const diamonds = Array.from({ length: W / 28 }, (_, i) => `M${i * 28 + 7} 11 l7 -7 l7 7 l-7 7 z`).join(' ');
+---
+<div class="divider container" aria-hidden="true">
+  <svg viewBox={`0 0 ${W} 22`} preserveAspectRatio="none">
+    <line x1="0" y1="1" x2={W} y2="1" />
+    <line x1="0" y1="21" x2={W} y2="21" />
+    {motif === 'pa-then' && <polyline points={zigzag} />}
+    {motif === 'ha-nhi' && <path d={waves} />}
+    {motif === 'ede' && <path d={diamonds} class="fill" />}
+  </svg>
+</div>
+
+<style>
+  .divider { padding-top: 88px; }
+  svg { width: 100%; height: 22px; overflow: visible; }
+  line, polyline, path { stroke: var(--accent); stroke-width: 1.5; fill: none; vector-effect: non-scaling-stroke; }
+  path.fill { fill: var(--accent); fill-opacity: 0.85; stroke: none; }
+  @media (max-width: 900px) { .divider { padding-top: 64px; } }
+</style>

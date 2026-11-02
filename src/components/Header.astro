@@ -1,0 +1,37 @@
+---
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+import type { NavKey } from '../lib/nav';
+interface Props {
+  active?: NavKey;
+  total: number;
+}
+const { active, total } = Astro.props;
+const links: { key: NavKey; href: string; label: string }[] = [
+  { key: 'map', href: '/home#map', label: 'Bản đồ' },
+  { key: 'groups', href: '/home#stages', label: 'Các dân tộc' },
+  { key: 'about', href: '/home#about', label: 'Về dự án' },
+  { key: 'sources', href: '/thank-you#sources', label: 'Nguồn tham khảo' },
+];
+---
+<header class="site-header">
+  <div class="container site-header__inner">
+    <Logo />
+    <nav class="site-nav" aria-label="Điều hướng chính">
+      {links.map((l) => (
+        <a href={l.href} aria-current={l.key === active ? 'page' : undefined}>{l.label}</a>
+      ))}
+    </nav>
+    <a class="pill" href="/home#passport" data-passport-pill>
+      <span class="dot" aria-hidden="true"></span>
+      Sổ hành trình · <span data-passport-count>0</span>/{total}
+    </a>
+    <details class="mobile-menu">
+      <summary aria-label="Mở menu"><Icon name="menu" size={22} /></summary>
+      <div class="mobile-menu__panel">
+        {links.map((l) => <a href={l.href}>{l.label}</a>)}
+        <a href="/home#passport">Sổ hành trình · <span data-passport-count>0</span>/{total}</a>
+      </div>
+    </details>
+  </div>
+</header>

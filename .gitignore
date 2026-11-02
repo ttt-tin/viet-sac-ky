@@ -1,0 +1,24 @@
+# build output
+dist/
+.vercel/
+.netlify/
+
+# generated types
+.astro/
+
+# dependencies
+node_modules/
+
+# logs
+npm-debug.log*
+
+# environment variables (secrets)
+.env
+.env.production
+
+# editors / OS
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db

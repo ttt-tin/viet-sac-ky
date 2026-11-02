@@ -1,0 +1,329 @@
+name: Ê Đê
+order: 3
+symbol: Đất
+accent: ede
+illustration: ede
+heroPhoto:
+  photo: ede/01
+  caption: Người Ê Đê trong trang phục truyền thống trước nhà dài
+  credit: Báo Lao Động
+tagline: Nhà dài, cồng chiêng trên đất đỏ bazan.
+intro: >-
+  Trên cao nguyên đất đỏ bazan, người Ê Đê sống trong những ngôi nhà dài của đại gia đình
+  mẫu hệ, nơi tiếng cồng chiêng và những câu sử thi được truyền qua nhiều thế hệ.
+map:
+  lon: 108.05
+  lat: 12.67
+  label: right
+facts:
+  - label: Dân số (2019)
+    value: 398.671 người
+  - label: Ngữ hệ
+    value: Nam Đảo
+  - label: Địa bàn chính
+    value: Đắk Lắk, Gia Lai, Khánh Hòa
+    note: Đắk Lắk gồm cả Phú Yên cũ
+  - label: Cảnh quan
+    value: Cao nguyên bazan
+  - label: Di sản
+    value: Cồng chiêng Tây Nguyên
+    note: UNESCO ghi danh năm 2008
+sections:
+  - id: origins
+    title: Nguồn gốc & ngôn ngữ
+    short: Nguồn gốc
+    blocks:
+      - type: text
+        body: |-
+          Người Ê Đê có lịch sử cư trú lâu đời ở khu vực miền Trung – Tây Nguyên; tổ tiên của họ đã sinh sống ở đây từ hàng nghìn năm trước. Tiếng Ê Đê thuộc **ngữ hệ Nam Đảo**, cùng nhóm với tiếng Gia Rai và tiếng Chăm.
+
+          Theo Tổng điều tra dân số năm 2019, người Ê Đê có 398.671 người. Trong xã hội truyền thống, người Ê Đê sống thành các **buôn**: đơn vị cư trú và cộng đồng, nơi các gia đình có quan hệ với nhau cùng sinh hoạt, lao động và duy trì phong tục.
+      - type: cards
+        title: Một số nhóm địa phương
+        columns: 4
+        items:
+          - name: Kpạ
+          - name: Bih
+          - name: Mthur
+          - name: Adham
+      - type: did
+        body: Mỗi nhóm địa phương có thể có những nét riêng về cách nói, tập quán và sinh hoạt, nhưng cùng góp phần tạo nên cộng đồng văn hóa Ê Đê.
+  - id: land
+    title: Vùng đất & cảnh quan
+    short: Vùng đất
+    blocks:
+      - type: text
+        body: |-
+          Người Ê Đê tập trung đông nhất ở **Đắk Lắk**, đặc biệt quanh Buôn Ma Thuột; một bộ phận sống ở phía nam Gia Lai và phía tây Phú Yên cũ (nay thuộc Đắk Lắk) và Khánh Hòa.
+
+          Môi trường sống truyền thống gắn với cao nguyên, đất đỏ bazan, rừng, sông suối và nương rẫy. Đất bazan ngày nay gắn với những vườn cà phê; rừng cung cấp nguyên liệu, thực phẩm và vật liệu cho đời sống; sông suối có ý nghĩa với sinh hoạt và sản xuất.
+      - type: gallery
+        items:
+          - photo: ede/02
+            caption: "Đất đỏ bazan giữa vườn rẫy"
+            credit: "Vietnam.vn"
+          - photo: ede/03
+            caption: "Rừng và đồi núi Tây Nguyên"
+            credit: "Báo Lao Động"
+          - photo: ede/04
+            caption: "Hồ Lắk"
+            credit: "Vietgoing"
+          - photo: ede/05
+            caption: "Thác Dray Nur"
+            credit: "Dân tộc và Phát triển – VietNamNet"
+      - type: list
+        title: Thắng cảnh nổi tiếng
+        items:
+          - Mùa hoa cà phê trắng trên cao nguyên Đắk Lắk.
+          - Hồ Lắk.
+          - Thác Dray Nur.
+  - id: house
+    title: Nhà ở
+    short: Nhà ở
+    blocks:
+      - type: text
+        body: |-
+          **Nhà dài** là một trong những biểu tượng nổi bật nhất của văn hóa Ê Đê. Ngôi nhà dựng trên hệ thống cột, kéo dài về phía sau để đủ chỗ cho một đại gia đình nhiều thế hệ. Vật liệu có thể gồm gỗ, tre, nứa và lá lợp mái, tùy địa phương và khả năng của gia đình.
+      - type: cards
+        title: Hai phần của nhà dài
+        columns: 2
+        items:
+          - name: Gah – phần khách
+            body: Phần phía trước, dùng để tiếp khách, tổ chức sinh hoạt chung và nghi lễ của gia đình.
+          - name: Ôk – phần ở
+            body: Phần phía sau, chủ yếu dành cho sinh hoạt riêng của các thành viên trong gia đình.
+      - type: gallery
+        items:
+          - photo: ede/06
+            caption: "Nhà dài truyền thống của người Ê Đê"
+            credit: "Dân tộc và Phát triển – VietNamNet"
+          - photo: ede/07
+            caption: "Nhà dài với cầu thang dẫn lên gian khách"
+            credit: "thiennhienmoitruong.vn"
+          - photo: ede/08
+            caption: "Cầu thang cái được chạm khắc"
+            credit: "Người Đưa Tin"
+      - type: text
+        body: |-
+          Trong nhà có thể gặp ché, cồng chiêng, trống, ghế dài kpan, đồ dùng nhà bếp và vật dụng sản xuất. Các chi tiết chạm khắc trên cột, xà và cầu thang cho thấy kỹ thuật và thẩm mỹ của kiến trúc truyền thống.
+      - type: gallery
+        title: Bên trong nhà dài
+        items:
+          - photo: ede/09
+            caption: "Không gian bên trong nhà dài"
+            credit: "Làng Văn hóa – Du lịch các dân tộc Việt Nam"
+          - photo: ede/10
+            caption: "Gian khách với ghế dài và vật dụng"
+            credit: "Dân tộc và Phát triển – VietNamNet"
+      - type: did
+        body: Nhà dài có thể có cầu thang được chạm khắc. Một số mẫu cầu thang truyền thống mang hình tượng liên quan đến người phụ nữ, thể hiện ý nghĩa văn hóa của chế độ mẫu hệ.
+  - id: costume
+    title: Trang phục & thổ cẩm
+    short: Trang phục
+    blocks:
+      - type: text
+        body: |-
+          Trang phục Ê Đê thường có **nền đen hoặc chàm**, kết hợp những dải hoa văn có màu sắc tương phản ở ngực áo, tay áo hoặc mép váy. Trang phục khác nhau theo giới tính, nhóm địa phương, độ tuổi và dịp sử dụng.
+      - type: compare
+        items:
+          - title: Trang phục nữ
+            points:
+              - Áo dài tay hoặc ngắn tay và váy quấn từ một tấm vải dài.
+              - Dịp lễ hội có thể kết hợp với trang sức và phụ kiện.
+          - title: Trang phục nam
+            points:
+              - Áo trang trí hoa văn ở ngực, vai hoặc tay và khố quấn quanh thân dưới.
+              - Đồ mặc hằng ngày đơn giản hơn đồ dùng trong nghi lễ.
+      - type: gallery
+        items:
+          - photo: ede/11
+            caption: "Trang phục nữ Ê Đê"
+            credit: "Báo Đại biểu Nhân dân"
+          - photo: ede/12
+            caption: "Trang phục của tù trưởng Ê Đê"
+            credit: "Bảo tàng Đắk Lắk"
+          - photo: ede/13
+            caption: "Trang phục nam và nữ Ê Đê"
+            credit: "Báo Nhân Dân"
+          - photo: ede/14
+            caption: "Trang phục nam Ê Đê"
+            credit: "Báo Lao Động"
+      - type: text
+        body: |-
+          **Dệt thổ cẩm** là nghề thủ công đòi hỏi sự khéo léo, kiên nhẫn và kinh nghiệm. Người dệt chuẩn bị sợi, bố trí sợi dọc và sợi ngang rồi đan xen theo trình tự; hoa văn được tạo ra ngay trong quá trình dệt.
+      - type: gallery
+        title: Nghề dệt thổ cẩm
+        items:
+          - photo: ede/15
+            caption: "Phụ nữ Ê Đê dệt thổ cẩm"
+            credit: "Báo Công Thương"
+          - photo: ede/16
+            caption: "Sợi dọc, sợi ngang trên khung dệt"
+            credit: "Bảo tàng Đắk Lắk"
+          - photo: ede/17
+            caption: "Lớp truyền dạy nghề dệt"
+            credit: "Báo Tiền Phong"
+  - id: festivals
+    title: Lễ hội & tín ngưỡng
+    short: Lễ hội
+    blocks:
+      - type: text
+        body: |-
+          Trong tín ngưỡng truyền thống, người Ê Đê có quan niệm về các thần linh, thường gọi bằng từ **Yang**, liên hệ với tự nhiên, sản xuất, sức khỏe và những sự kiện quan trọng của đời người. Nghi lễ được tổ chức ở quy mô gia đình hoặc cộng đồng; lễ vật, lời khấn và trình tự có thể khác nhau giữa các buôn làng.
+      - type: cards
+        title: Bốn nghi lễ tiêu biểu
+        columns: 2
+        items:
+          - name: Lễ lên nhà mới
+            photo: ede/27
+            credit: "VOV"
+            body: Đánh dấu việc gia đình bắt đầu ở nhà mới, mong cuộc sống ổn định, gia đình bình an.
+          - name: Lễ cúng ché
+            photo: ede/28
+            credit: "Báo Sức khỏe & Đời sống"
+            body: Ché đựng đồ uống lên men như rượu cần; một số ché có giá trị đặc biệt về tài sản, địa vị và đời sống tinh thần.
+          - name: Lễ mừng cơm mới
+            photo: ede/29
+            credit: "Báo Thanh Niên"
+            body: Tổ chức sau vụ thu hoạch để tạ ơn thần linh, cầu mong no đủ và chia sẻ niềm vui mùa vụ.
+          - name: Lễ cúng bến nước
+            photo: ede/30
+            credit: "Dân tộc và Phát triển – VietNamNet"
+            body: Tạ ơn thần linh, cầu mong nguồn nước trong lành, dồi dào; thể hiện ý thức gìn giữ nguồn nước của cả buôn.
+      - type: list
+        title: Các nghi lễ khác
+        items:
+          - Lễ cúng lúa giống, lễ cầu mưa, lễ cúng no đủ (Kăm Mah), lễ cúng sức khỏe.
+          - Nghi lễ vòng đời như lễ cúng trưởng thành, nghi lễ rước rể và lễ bỏ mả.
+      - type: gallery
+        title: Nghi lễ nông nghiệp và sức khỏe
+        items:
+          - photo: ede/31
+            caption: "Lễ cúng lúa giống"
+            credit: "Báo ảnh Dân tộc và Miền núi"
+          - photo: ede/32
+            caption: "Lễ cầu mưa"
+            credit: "Tạp chí Văn hóa Nghệ thuật"
+          - photo: ede/33
+            caption: "Lễ cúng no đủ (Kăm Mah)"
+            credit: "Cổng thông tin điện tử tỉnh Đắk Lắk"
+          - photo: ede/34
+            caption: "Lễ cúng sức khỏe"
+            credit: "Dân tộc và Phát triển – VietNamNet"
+  - id: music
+    title: Âm nhạc & nhạc cụ
+    short: Âm nhạc
+    blocks:
+      - type: badge
+        text: Không gian văn hóa Cồng chiêng Tây Nguyên · UNESCO 2008
+      - type: text
+        body: |-
+          **Cồng chiêng** là hình ảnh tiêu biểu của âm nhạc Tây Nguyên. Mỗi bộ chiêng gồm nhiều chiếc với kích thước và cao độ khác nhau; khi phối hợp, người diễn tấu tạo nên nhịp điệu và hòa âm cho từng dịp. Không gian văn hóa Cồng chiêng Tây Nguyên được UNESCO công nhận là Kiệt tác di sản truyền khẩu và phi vật thể của nhân loại năm 2005, rồi ghi danh vào Danh sách di sản văn hóa phi vật thể đại diện của nhân loại năm 2008.
+      - type: figure
+        photo: ede/18
+        caption: "Bộ cồng chiêng của người Ê Đê"
+        credit: "Bảo tàng Đắk Lắk"
+      - type: cards
+        columns: 3
+        items:
+          - name: Trống h'gơr
+            photo: ede/19
+            credit: "Bảo tàng Đắk Lắk"
+            body: Trống lớn xuất hiện cùng các nhạc cụ khác trong biểu diễn và nghi lễ.
+          - name: Kèn đing năm
+            photo: ede/24
+            credit: "Báo Khánh Hòa"
+            body: Sáu ống nứa gắn vào quả bầu khô, âm thanh trầm bổng, thường đệm cho điệu hát ay ray.
+          - name: Sáo đing buốt
+            photo: ede/25
+            credit: "Dân tộc và Phát triển – VietNamNet"
+            body: Làm từ tre, nứa; âm thanh nhẹ nhàng, trầm lắng.
+          - name: Chiêng tre cing kram
+            photo: ede/26
+            credit: "Bảo tàng Đắk Lắk"
+            body: Nhiều ống tre kích thước khác nhau, gõ lên tạo giai điệu mộc mạc.
+          - name: Ghế kpan
+            photo: ede/21
+            credit: "Dân tộc và Phát triển – VietNamNet"
+            body: Ghế dài bằng gỗ trong nhà dài; có thể là chỗ ngồi của người diễn tấu cồng chiêng.
+      - type: did
+        title: Sử thi Đăm Săn
+        body: Người Ê Đê có kho tàng sử thi và truyện kể truyền miệng phong phú, nổi bật là sử thi Đăm Săn.
+  - id: food
+    title: Ẩm thực
+    short: Ẩm thực
+    blocks:
+      - type: text
+        body: |-
+          Ẩm thực Ê Đê gắn với nguyên liệu từ rừng, rẫy, vườn và suối. Vị đắng, vị cay và mùi thơm của gia vị địa phương là những đặc điểm dễ gặp trong các món truyền thống.
+      - type: cards
+        columns: 3
+        items:
+          - name: Cà đắng vếch bò
+            photo: ede/38
+            credit: "Báo Thanh Niên"
+            body: Món đãi khách quý và dùng trong dịp lễ, theo kinh nghiệm dân gian giúp ấm bụng, dễ tiêu hóa.
+          - name: Canh bột lá yao
+            photo: ede/39
+            credit: "Báo Sức khỏe & Đời sống"
+            body: Món canh giải nhiệt sau những ngày làm rẫy.
+          - name: Đu đủ giã kiến vàng
+            photo: ede/40
+            credit: "ejfarm.vn"
+            body: Tận dụng nguyên liệu tự nhiên để tạo hương vị độc đáo.
+          - name: Lá mì xào
+            photo: ede/41
+            credit: "Báo Lâm Đồng"
+            body: Lá mì được sơ chế kỹ rồi xào với gia vị.
+          - name: Rượu cần
+            photo: ede/42
+            credit: "Báo Đại Đoàn Kết"
+            body: Xuất hiện trong các nghi lễ quan trọng như mừng lúa mới, cúng bến nước, cưới hỏi.
+  - id: family
+    title: Gia đình & phong tục vòng đời
+    short: Gia đình
+    blocks:
+      - type: text
+        body: |-
+          Gia đình Ê Đê truyền thống theo **chế độ mẫu hệ**: dòng họ bên mẹ giữ vai trò quan trọng, và nhiều thế hệ có thể cùng sống trong một nhà dài, chia sẻ công việc và chăm sóc lẫn nhau.
+
+          Những nghi lễ đánh dấu các giai đoạn quan trọng của đời người như đặt tên cho trẻ, trưởng thành, kết hôn hay tang ma đều có ý nghĩa và trình tự riêng, phản ánh mối quan hệ giữa cá nhân, gia đình và cộng đồng.
+      - type: gallery
+        title: Nghi lễ vòng đời
+        items:
+          - photo: ede/35
+            caption: "Lễ cúng trưởng thành"
+            credit: "Dân tộc và Phát triển – VietNamNet"
+          - photo: ede/36
+            caption: "Nghi thức rước rể"
+            credit: "Bảo tàng Đắk Lắk"
+          - photo: ede/37
+            caption: "Lễ bỏ mả"
+            credit: "VOV World"
+  - id: today
+    title: Di sản hôm nay
+    short: Di sản hôm nay
+    blocks:
+      - type: text
+        body: |-
+          Ngày nay, nghề dệt thổ cẩm Ê Đê vừa giữ kỹ năng thủ công truyền qua nhiều thế hệ, vừa tạo cơ hội phát triển sản phẩm thủ công và du lịch văn hóa. Các nghi lễ như lễ cúng bến nước, lễ mừng cơm mới vẫn là dịp để người trong buôn cùng tham gia, gắn kết cộng đồng.
+quiz:
+  - question: Phần phía trước của nhà dài Ê Đê, dùng để tiếp khách và sinh hoạt chung, gọi là gì?
+    options: [Ôk, Gah, Kpan, Buôn]
+    answer: 1
+  - question: Không gian văn hóa Cồng chiêng Tây Nguyên được UNESCO ghi danh vào Danh sách đại diện năm nào?
+    options: ['2003', '2005', '2008', '2012']
+    answer: 2
+  - question: Ghế kpan của người Ê Đê là gì?
+    options: [Một loại nhạc cụ, Ghế dài bằng gỗ trong nhà dài, Một món ăn, Tên một nghi lễ]
+    answer: 1
+chat:
+  greeting: Chào bạn, mình là người dẫn đường của phòng Ê Đê. Bạn muốn biết thêm về nhà dài, cồng chiêng hay các nghi lễ của người Ê Đê?
+  suggestions:
+    - Nhà dài Ê Đê được chia thành những phần nào?
+    - Cồng chiêng có ý nghĩa gì với người Ê Đê?
+    - Lễ cúng bến nước để làm gì?
+    - Món ăn nào đặc trưng của người Ê Đê?
+sources:
+  - title: Tài liệu nghiên cứu của nhóm – Dân tộc Ê Đê
+  - title: Ảnh tư liệu trong tài liệu nhóm – Bảo tàng Đắk Lắk, Báo Lao Động, Dân tộc và Phát triển, VOV, Báo Thanh Niên (cần xin phép trước khi dùng)

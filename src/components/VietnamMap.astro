@@ -1,0 +1,57 @@
+---
+// Illustrated map of Vietnam with one marker per ethnic group.
+// Always shows the Hoàng Sa and Trường Sa archipelagos.
+// Markers are links (they work without JavaScript); hovering or focusing a
+// marker also selects the matching card next to the map (see index script).
+import { MAP_HEIGHT, MAP_WIDTH, OUTLINE_PATH, HOANG_SA, TRUONG_SA, PHU_QUOC, CON_DAO, project } from '../data/map';
+import { groupUrl, type Group } from '../lib/groups';
+interface Props {
+  groups: Group[];
+  selected?: string;
+}
+const { groups, selected } = Astro.props;
+const markers = groups.map((g) => ({ ...project(g.data.map.lon, g.data.map.lat), id: g.id, name: g.data.name, accent: g.data.accent, label: g.data.map.label }));
+const dots = (list: [number, number][]) => list.map(([lon, lat]) => project(lon, lat));
+const hs = dots(HOANG_SA);
+const ts = dots(TRUONG_SA);
+const pq = project(...PHU_QUOC);
+const cd = project(...CON_DAO);
+const hsLabel = project(110.8, 17.25);
+const tsLabel = project(112.8, 12.25);
+const seaLabel = project(110.4, 13.8);
+---
+<svg class="vn-map" viewBox={`0 0 ${MAP_WIDTH} ${MAP_HEIGHT}`} role="group" aria-label="Bản đồ Việt Nam và các chặng của hành trình">
+  <title>Bản đồ Việt Nam, có quần đảo Hoàng Sa và Trường Sa</title>
+  <path d={OUTLINE_PATH} transform="translate(4,5)" fill="#D9C7A4" opacity="0.8" />
+  <path d={OUTLINE_PATH} fill="#EFE4CC" stroke="#7A5236" stroke-width="1.6" stroke-linejoin="round" />
+  <ellipse cx={pq.x} cy={pq.y} rx="5" ry="8" fill="#EFE4CC" stroke="#7A5236" stroke-width="1.2" />
+  <circle cx={cd.x} cy={cd.y} r="2.4" fill="#7A5236" />
+  <g fill="#7A5236" aria-hidden="true">
+    {hs.map((p) => <circle cx={p.x} cy={p.y} r="2.6" />)}
+    {ts.map((p) => <circle cx={p.x} cy={p.y} r="2.6" />)}
+  </g>
+  <text x={hsLabel.x} y={hsLabel.y} class="vn-map__isl">QĐ. Hoàng Sa</text>
+  <text x={tsLabel.x} y={tsLabel.y} class="vn-map__isl">QĐ. Trường Sa</text>
+  <text x={seaLabel.x} y={seaLabel.y} class="vn-map__sea" aria-hidden="true">Biển Đông</text>
+  {markers.map((m) => (
+    <a href={groupUrl(m.id)} class:list={['vn-map__marker', `theme-${m.accent}`, { 'is-selected': m.id === selected }]} data-map-marker={m.id} aria-label={`Ghé thăm ${m.name}`}>
+      <circle class="vn-map__halo" cx={m.x} cy={m.y} r="22" />
+      <circle class="vn-map__dot" cx={m.x} cy={m.y} r="11" />
+      <text x={m.label === 'left' ? m.x - 18 : m.x + 18} y={m.y + 5} text-anchor={m.label === 'left' ? 'end' : 'start'} class="vn-map__label">{m.name}</text>
+    </a>
+  ))}
+</svg>
+
+<style>
+  .vn-map { width: 100%; height: auto; max-width: 560px; margin-inline: auto; overflow: visible; }
+  .vn-map__isl { font-family: var(--font-sans); font-size: 12px; font-weight: 500; fill: var(--brown); }
+  .vn-map__sea { font-family: var(--font-hand); font-size: 18px; fill: var(--brown); opacity: 0.7; }
+  .vn-map__marker { cursor: pointer; outline: none; }
+  .vn-map__dot { fill: var(--accent); stroke: var(--cream); stroke-width: 3; transition: r 0.15s ease; }
+  .vn-map__halo { fill: var(--accent); opacity: 0; transition: opacity 0.2s ease; }
+  .vn-map__label { font-family: var(--font-serif); font-weight: 600; font-size: 16px; fill: var(--ink); }
+  .vn-map__marker:hover .vn-map__halo,
+  .vn-map__marker:focus-visible .vn-map__halo,
+  .vn-map__marker.is-selected .vn-map__halo { opacity: 0.2; }
+  .vn-map__marker:focus-visible .vn-map__dot { stroke: var(--ink); }
+</style>
