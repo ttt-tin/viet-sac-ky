@@ -38,7 +38,7 @@ Without an API key the whole site works; the chat guide just replies that it is 
 | `/`                | `src/pages/index.astro`       | Intro "book cover" with the start button        |
 | `/home`            | `src/pages/home.astro`        | About, illustrated map, postcards, passport     |
 | `/ethnic/<slug>`   | `src/pages/ethnic/[slug].astro` | One room per ethnic group (shared template)   |
-| `/thank-you`       | `src/pages/thank-you.astro`   | Thanks, project message, team, sources          |
+| `/thank-you`       | `src/pages/thank-you.astro`   | Closing message, thanks, project info, sources  |
 | `/api/chat`        | `src/pages/api/chat.ts`       | AI guide endpoint (server-side, streaming)      |
 | any other          | `src/pages/404.astro`         | "Lost in the mountains" page                    |
 
@@ -59,7 +59,8 @@ typo or missing field is reported when you run `npm run dev` or `npm run build`.
 
 The AI guide answers **only** from this file, so improving the content also improves the chat.
 
-Team members for the closing page are in `src/data/team.ts`.
+The closing page no longer lists team members. `src/data/team.ts` and
+`src/components/MemberCard.astro` are kept (unused) in case the section is brought back.
 
 ## Images
 

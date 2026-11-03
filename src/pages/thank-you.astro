@@ -2,10 +2,8 @@
 // Closing page – "Trang cuối sổ".
 import BaseLayout from '../layouts/BaseLayout.astro';
 import StampSlot from '../components/StampSlot.astro';
-import MemberCard from '../components/MemberCard.astro';
 import Icon from '../components/Icon.astro';
 import { getGroups } from '../lib/groups';
-import { team } from '../data/team';
 
 const groups = await getGroups();
 const palette: Record<string, string> = { 'ha-nhi': '#34466B', 'pa-then': '#B23A2A', ede: '#8A4B2C' };
@@ -88,14 +86,6 @@ const photoCredits = groups.map((g) => {
     </dl>
   </section>
 
-  <section class="container team" id="team" aria-labelledby="team-title">
-    <p class="eyebrow">Những người thực hiện</p>
-    <h2 class="h2" id="team-title">Nhóm Mèo Méo Meo</h2>
-    <div class="team__grid">
-      {team.map((m) => <MemberCard member={m} />)}
-    </div>
-  </section>
-
   <section class="container refs" id="sources" aria-labelledby="sources-heading">
     <div>
       <h2 class="h3" id="sources-heading">Nguồn tham khảo</h2>
@@ -168,8 +158,6 @@ const photoCredits = groups.map((g) => {
   .project__info dt { font-size: 14px; color: var(--ink-soft); }
   .project__info dd { margin: 4px 0 0; font-family: var(--font-serif); font-weight: 600; font-size: 20px; line-height: 1.4; }
   .project__wide dd { font-family: var(--font-sans); font-weight: 400; font-size: 17px; line-height: 1.65; }
-  .team { padding-top: 88px; }
-  .team__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; margin-top: 36px; }
   .refs { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; padding-top: 80px; }
   .refs ul { margin-top: 12px; padding-left: 18px; font-size: 14px; line-height: 1.9; color: var(--ink-soft); }
   .refs__group { font-weight: 600; color: var(--ink); }
