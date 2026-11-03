@@ -13,6 +13,10 @@ export default defineConfig({
   env: {
     schema: {
       // Secrets are read at runtime on the server and never sent to the browser.
+      // Chat guide provider: 'gemini' or 'claude'. Empty = use whichever key is set (Gemini first).
+      AI_PROVIDER: envField.enum({ context: 'server', access: 'secret', values: ['gemini', 'claude'], optional: true }),
+      GEMINI_API_KEY: envField.string({ context: 'server', access: 'secret', optional: true }),
+      GEMINI_MODEL: envField.string({ context: 'server', access: 'secret', optional: true, default: 'gemini-flash-lite-latest' }),
       ANTHROPIC_API_KEY: envField.string({ context: 'server', access: 'secret', optional: true }),
       AI_MODEL: envField.string({ context: 'server', access: 'secret', optional: true, default: 'claude-haiku-5-5' }),
       CHAT_RATE_LIMIT: envField.number({ context: 'server', access: 'secret', optional: true, default: 20 }),

@@ -2,9 +2,21 @@
 // Runs on the server only (on demand), so the API key never reaches the browser.
 // Request:  { group: "pa-then", messages: [{ role: "user" | "assistant", content: string }] }
 // Response: a plain-text stream of the answer, ending with a "NGUỒN: <section-id>" line.
+//
+// Two AI providers are supported (choose with AI_PROVIDER, or let it pick the one
+// whose key is set, Gemini first):
+//   - gemini: Google Gemini API, free tier available (GEMINI_API_KEY, GEMINI_MODEL)
+//   - claude: Anthropic Claude API, paid (ANTHROPIC_API_KEY, AI_MODEL)
 import type { APIRoute } from 'astro';
 import { getEntry } from 'astro:content';
-import { ANTHROPIC_API_KEY, AI_MODEL, CHAT_RATE_LIMIT } from 'astro:env/server';
+import {
+  AI_PROVIDER,
+  GEMINI_API_KEY,
+  GEMINI_MODEL,
+  ANTHROPIC_API_KEY,
+  AI_MODEL,
+  CHAT_RATE_LIMIT,
+} from 'astro:env/server';
 import { systemPrompt } from '../../lib/chat-context';
 
 export const prerender = false;
@@ -60,9 +72,81 @@ function parseMessages(input: unknown): Message[] | null {
   return out;
 }
 
+type Provider = 'gemini' | 'claude';
+
+function pickProvider(): Provider | null {
+  if (AI_PROVIDER === 'gemini') return GEMINI_API_KEY ? 'gemini' : null;
+  if (AI_PROVIDER === 'claude') return ANTHROPIC_API_KEY ? 'claude' : null;
+  if (GEMINI_API_KEY) return 'gemini';
+  if (ANTHROPIC_API_KEY) return 'claude';
+  return null;
+}
+
+// Gemini models tried in order. If one is overloaded (503), rate limited (429) or
+// retired (404), the next one is used. The "-latest" aliases follow Google's
+// current models, so they keep working when older versions are switched off.
+const GEMINI_FALLBACKS = ['gemini-flash-lite-latest', 'gemini-flash-latest'];
+
+async function callGemini(system: string, history: Message[]): Promise<Response> {
+  const models = [...new Set([GEMINI_MODEL || GEMINI_FALLBACKS[0], ...GEMINI_FALLBACKS])];
+  const body = JSON.stringify({
+    systemInstruction: { parts: [{ text: system }] },
+    contents: history.map((m) => ({ role: m.role === 'assistant' ? 'model' : 'user', parts: [{ text: m.content }] })),
+    // Newer Gemini models "think" before answering and those tokens count toward
+    // this limit, so it is set well above the ~120-word answer length.
+    generationConfig: { maxOutputTokens: 4096, temperature: 0.4 },
+  });
+  let res!: Response;
+  for (const model of models) {
+    res = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:streamGenerateContent?alt=sse`,
+      { method: 'POST', headers: { 'x-goog-api-key': GEMINI_API_KEY!, 'content-type': 'application/json' }, body },
+    );
+    if (![404, 429, 503].includes(res.status)) return res;
+    console.warn(`[chat:gemini] ${model} unavailable (${res.status}), trying the next model`);
+    await res.body?.cancel().catch(() => {});
+  }
+  return res;
+}
+
+// Sends the request to the chosen provider. Both answer with Server-Sent Events.
+function callProvider(provider: Provider, system: string, history: Message[]): Promise<Response> {
+  if (provider === 'gemini') return callGemini(system, history);
+  return fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: {
+      'x-api-key': ANTHROPIC_API_KEY!,
+      'anthropic-version': '2023-06-01',
+      'content-type': 'application/json',
+    },
+    body: JSON.stringify({
+      model: AI_MODEL || 'claude-haiku-5-5',
+      max_tokens: 1024,
+      stream: true,
+      // The room material is identical for every visitor: cache it.
+      system: [{ type: 'text', text: system, cache_control: { type: 'ephemeral' } }],
+      messages: history,
+    }),
+  });
+}
+
+// Reads one SSE `data:` payload and returns the answer text in it, if any.
+// Returns `null` for an error event.
+function extractText(provider: Provider, parsed: any): string | null {
+  if (provider === 'gemini') {
+    if (parsed.error) return null;
+    const parts: any[] = parsed.candidates?.[0]?.content?.parts ?? [];
+    return parts.filter((part) => typeof part.text === 'string' && !part.thought).map((part) => part.text).join('');
+  }
+  if (parsed.type === 'error') return null;
+  if (parsed.type === 'content_block_delta' && parsed.delta?.type === 'text_delta') return parsed.delta.text;
+  return '';
+}
+
 export const POST: APIRoute = async ({ request, clientAddress }) => {
-  if (!ANTHROPIC_API_KEY) {
-    return error(503, 'Người dẫn đường chưa được kết nối. Nhóm cần thêm khóa ANTHROPIC_API_KEY.');
+  const provider = pickProvider();
+  if (!provider) {
+    return error(503, 'Người dẫn đường chưa được kết nối. Nhóm cần thêm khóa GEMINI_API_KEY (hoặc ANTHROPIC_API_KEY).');
   }
 
   let body: unknown;
@@ -92,30 +176,15 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
 
   let upstream: Response;
   try {
-    upstream = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'x-api-key': ANTHROPIC_API_KEY,
-        'anthropic-version': '2023-06-01',
-        'content-type': 'application/json',
-      },
-      body: JSON.stringify({
-        model: AI_MODEL || 'claude-haiku-5-5',
-        max_tokens: 1024,
-        stream: true,
-        // The room material is identical for every visitor: cache it.
-        system: [{ type: 'text', text: systemPrompt(entry), cache_control: { type: 'ephemeral' } }],
-        messages: history,
-      }),
-    });
+    upstream = await callProvider(provider, systemPrompt(entry), history);
   } catch (err) {
-    console.error('[chat] network error', err);
+    console.error(`[chat:${provider}] network error`, err);
     return error(502, 'Người dẫn đường đang bận, bạn thử lại sau nhé.');
   }
 
   if (!upstream.ok || !upstream.body) {
-    console.error('[chat] upstream error', upstream.status, await upstream.text().catch(() => ''));
-    const busy = upstream.status === 429 || upstream.status === 529;
+    console.error(`[chat:${provider}] upstream error`, upstream.status, await upstream.text().catch(() => ''));
+    const busy = upstream.status === 429 || upstream.status === 503 || upstream.status === 529;
     return error(busy ? 503 : 502, busy ? 'Người dẫn đường đang tiếp nhiều khách, bạn thử lại sau ít phút nhé.' : 'Người dẫn đường đang bận, bạn thử lại sau nhé.');
   }
 
@@ -145,18 +214,20 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
             if (!line.startsWith('data:')) continue;
             const data = line.slice(5).trim();
             if (!data) continue;
+            let parsed: unknown;
             try {
-              const parsed = JSON.parse(data);
-              if (parsed.type === 'content_block_delta' && parsed.delta?.type === 'text_delta') {
-                controller.enqueue(encoder.encode(parsed.delta.text));
-                sent = true;
-              } else if (parsed.type === 'error') {
-                console.error('[chat] stream error', parsed.error);
-                controller.enqueue(encoder.encode('\n\n(Người dẫn đường bị gián đoạn, bạn hỏi lại nhé.)'));
-                sent = true;
-              }
+              parsed = JSON.parse(data);
             } catch {
-              /* ignore malformed or unknown events */
+              continue; // ignore malformed events
+            }
+            const text = extractText(provider, parsed);
+            if (text === null) {
+              console.error(`[chat:${provider}] stream error`, data);
+              controller.enqueue(encoder.encode('\n\n(Người dẫn đường bị gián đoạn, bạn hỏi lại nhé.)'));
+              sent = true;
+            } else if (text) {
+              controller.enqueue(encoder.encode(text));
+              sent = true;
             }
           }
         }

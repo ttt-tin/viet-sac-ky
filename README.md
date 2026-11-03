@@ -11,13 +11,13 @@ Built with [Astro](https://astro.build): pages are static HTML; only the AI chat
 
 - Node.js 18.20.8+ (LTS 20 or 22 recommended) and npm
 - Git
-- Optional, for the chat guide: a Claude API key from <https://console.anthropic.com>
+- Optional, for the chat guide: a Gemini API key (free tier) or a Claude API key
 
 ## Getting started
 
 ```bash
 npm install
-cp .env.example .env      # then paste your ANTHROPIC_API_KEY (optional)
+cp .env.example .env      # then paste your GEMINI_API_KEY (optional)
 npm run dev               # http://localhost:4321
 ```
 
@@ -81,21 +81,28 @@ Team members for the closing page are in `src/data/team.ts`.
 ## AI chat guide
 
 - UI: `src/components/ChatGuide.astro` + `src/scripts/chat.ts`
-- Server: `src/pages/api/chat.ts` (calls the Claude Messages API with streaming and prompt caching)
+- Server: `src/pages/api/chat.ts` (streams the answer from the chosen AI provider)
 - Prompt and grounding rules: `src/lib/chat-context.ts`
-- Environment variables (set in `.env` locally and in the hosting dashboard):
-  - `ANTHROPIC_API_KEY` (required for the chat)
-  - `AI_MODEL` (default `claude-haiku-5-5`)
-  - `CHAT_RATE_LIMIT` (questions per visitor per hour, default 20)
-- Set a monthly spend limit in the Anthropic Console. The built-in rate limiter is per server
-  instance; use a shared store (e.g. Upstash Redis) if you need a strict global limit.
+- Two providers are supported. The server uses whichever key is set (Gemini first), or the
+  one named in `AI_PROVIDER`:
+
+  | Provider | Key | Model variable (default) | Cost |
+  | -------- | --- | ------------------------ | ---- |
+  | Google Gemini | `GEMINI_API_KEY` from <https://aistudio.google.com/apikey> | `GEMINI_MODEL` (`gemini-flash-lite-latest`, falls back to `gemini-flash-latest` when busy) | Free tier (rate limited; Google may use free-tier prompts to improve its products) |
+  | Anthropic Claude | `ANTHROPIC_API_KEY` from <https://console.anthropic.com> | `AI_MODEL` (`claude-haiku-5-5`) | Paid per use; prompt caching keeps it cheap |
+
+- Other variables: `AI_PROVIDER` (`gemini` or `claude`, optional), `CHAT_RATE_LIMIT`
+  (questions per visitor per hour, default 20).
+- Set the variables in `.env` locally and in the hosting dashboard. Redeploy after changing them.
+- The built-in rate limiter is per server instance; use a shared store (e.g. Upstash Redis) if
+  you need a strict global limit. For Claude, also set a monthly spend limit in the Console.
 - Before launch, run the team's test questions (including tricky ones) against all three rooms.
 
 ## Deploying (Vercel)
 
 1. Push this folder to a GitHub repository.
 2. Import the repository at <https://vercel.com/new> (framework: Astro, detected automatically).
-3. Add `ANTHROPIC_API_KEY` under Project → Settings → Environment Variables.
+3. Add `GEMINI_API_KEY` (or `ANTHROPIC_API_KEY`) under Project → Settings → Environment Variables.
 4. Deploy. Every push to the main branch redeploys the site.
 
 To use Netlify or Cloudflare Pages instead, replace the adapter in `astro.config.mjs`
